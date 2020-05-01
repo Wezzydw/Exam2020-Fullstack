@@ -27,7 +27,7 @@ export class AuthState {
   }
 
   @Action(Login)
-  loginWithGoogle(ctx: StateContext<AuthStateModel>) {
+  login(ctx: StateContext<AuthStateModel>) {
     // const state = ctx.getState();
     // return this.authService
     //   .loginGoogle().pipe(

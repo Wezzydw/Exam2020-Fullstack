@@ -4,11 +4,10 @@ import {AppComponent} from './app.component';
 import {UserDetailComponent} from './users/user-detail/user-detail.component';
 import {CertificateDetailComponent} from './certificates/certificate-detail/certificate-detail.component';
 
-const routes: Routes = [
-  { path: '', component: AppComponent},
-  { path: 'userDetail', component: UserDetailComponent},
-  { path: 'certDetail', component: CertificateDetailComponent}
-];
+const routes: Routes = [{
+  path: 'auth',
+  loadChildren: () => import('./auth/auth.module').then(n => n.AuthModule)
+}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

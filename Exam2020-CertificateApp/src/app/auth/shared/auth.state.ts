@@ -1,11 +1,12 @@
-import {User} from './user';
+import {AuthUser} from './authUser';
 import {Injectable} from '@angular/core';
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {AuthService} from './auth.service';
-import {Login} from './auth.action';
+import {LoginEmail} from './auth.action';
+import {tap} from 'rxjs/operators';
 
 export class AuthStateModel {
-  loggedInUser: User;
+  loggedInUser: AuthUser;
   userName: string;
   role: string;
 }
@@ -26,20 +27,21 @@ export class AuthState {
     return state.loggedInUser;
   }
 
-  @Action(Login)
-  login(ctx: StateContext<AuthStateModel>) {
-    // const state = ctx.getState();
-    // return this.authService
-    //   .loginGoogle().pipe(
-    //     tap((result) => {
-    //       ctx.setState({
-    //         ...state,
-    //         loggedInUser: result,
-    //         userName: result.displayName
-    //       });
-    //       ctx.dispatch(new GetRole(result.uid));
-    //     })
-    //   );
+  @Action(LoginEmail)
+  loginEmail(ctx: StateContext<AuthStateModel>, action: LoginEmail) {
+     const state = ctx.getState();
+     return this.authService
+       .logInEmail(action.email, action.password)
+       .pipe(
+         tap((result) => {
+           ctx.setState({
+             ...state,
+             loggedInUser: result,
+             userName: result.username
+           });
+           // ctx.dispatch()
+         })
+       );
   }
 
 }

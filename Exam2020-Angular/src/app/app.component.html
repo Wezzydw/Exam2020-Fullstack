@@ -1,12 +1,15 @@
-<div>
-  <form [formGroup]="loginForm">
-    <label>
-      Email:
-      <input type="text" formControlName="email">
-    </label>
-    <label>
-      Password:
-      <input type="text" formControlName="password">
-    </label>
-  </form>
+
+<div fxLayout="column" fxFlexFill>
+  <h1>Frontpage perhaps</h1>
+  <nav>
+    <app-navbar></app-navbar>
+  </nav>
+  <div fxFlex>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+  <!--<footer>
+    <app-footer></app-footer>
+  </footer>-->
 </div>

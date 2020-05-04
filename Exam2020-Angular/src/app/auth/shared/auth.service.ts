@@ -30,7 +30,7 @@ export class AuthService {
     await this.afAuth.auth.signOut();
     this.router.navigate(['/login']);
   }
-  async registerEmail(email: string, password: string) {
+  async registerUser(email: string, password: string) {
     await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
   }
 

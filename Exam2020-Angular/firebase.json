@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "Exam2020",
+      "public": "dist/Exam2020",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

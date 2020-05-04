@@ -1,4 +1,4 @@
-import {User} from '../shared/user';
+import {AuthUser} from '../shared/authUser';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Component, OnInit} from '@angular/core';
 
@@ -8,7 +8,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  user: User;
+  user: AuthUser;
 
   userForm = new FormGroup({
     name: new FormControl(''),

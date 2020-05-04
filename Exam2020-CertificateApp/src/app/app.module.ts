@@ -12,10 +12,16 @@ import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {NavbarComponent} from './shared/navbar/navbar.component';
+import {UserDetailComponent} from './users/user-detail/user-detail.component';
+import {CertificateDetailComponent} from './certificates/certificate-detail/certificate-detail.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent,
+    UserDetailComponent,
+    CertificateDetailComponent
   ],
   imports: [
     BrowserModule,

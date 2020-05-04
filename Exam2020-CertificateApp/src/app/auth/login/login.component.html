@@ -1,1 +1,17 @@
 <p>login works!</p>
+<div>
+
+</div>
+<div>
+  <form [formGroup]="loginForm">
+  <label>
+    Email:
+    <input type="text" formControlName="email">
+  </label>
+  <label>
+    Password:
+    <input type="text" formControlName="password">
+  </label>
+  <button (click)="loginWithEmail()">Log in</button>
+  </form>
+</div>

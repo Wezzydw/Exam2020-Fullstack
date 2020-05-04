@@ -1,6 +1,6 @@
 
-export class Login {
-  static readonly type = '[Auth] Login';
+export class LoginEmail {
+  static readonly type = '[Auth] LoginEmail';
 
-  constructor() {}
+  constructor(public email: string, public password: string) {}
 }

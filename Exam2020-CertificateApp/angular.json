@@ -118,8 +118,13 @@
               "devServerTarget": "Exam2020-CertificateApp:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
-    }},
+    }
+  },
   "defaultProject": "Exam2020-CertificateApp"
 }

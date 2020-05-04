@@ -20,8 +20,6 @@ import {CertificateDetailComponent} from './certificates/certificate-detail/cert
   declarations: [
     AppComponent,
     NavbarComponent,
-    UserDetailComponent,
-    CertificateDetailComponent
   ],
   imports: [
     BrowserModule,

@@ -5,9 +5,9 @@ import {UserDetailComponent} from './users/user-detail/user-detail.component';
 import {CertificateDetailComponent} from './certificates/certificate-detail/certificate-detail.component';
 
 const routes: Routes = [
-  { path: '', component: AppComponent},
-  { path: 'userDetail', component: UserDetailComponent},
-  { path: 'certDetail', component: CertificateDetailComponent}
+  { path: 'user', loadChildren: () => import('./users/users.module').then(m => m.UsersModule)},
+  { path: 'cert', loadChildren: () => import('./certificates/certificates.module').then(m => m.CertificatesModule)},
+  { path: '', redirectTo: '', pathMatch: 'full'}
 ];
 
 @NgModule({

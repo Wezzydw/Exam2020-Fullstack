@@ -21,17 +21,17 @@ export class AuthService {
     // const provider = new auth.EmailAuthProvider();
     // const credential = await this.afAuth.signInWithEmailAndPassword(email, password);
     // this.getUser(credential.user.uid);
-    return from(this.afAuth.signInWithEmailAndPassword(email, password))
+    return from(this.afAuth.auth.signInWithEmailAndPassword(email, password))
       .pipe(
         map(credential => this.firebaseUserToAuthUser(credential.user))
       );
   }
   async logOut() {
-    await this.afAuth.signOut();
+    await this.afAuth.auth.signOut();
     this.router.navigate(['/login']);
   }
   async registerEmail(email: string, password: string) {
-    await this.afAuth.createUserWithEmailAndPassword(email, password);
+    await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
   }
 
   private getUser(uid: string): AuthUser {

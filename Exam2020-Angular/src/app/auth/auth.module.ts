@@ -4,7 +4,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AuthRoutingModule} from './auth-routing.module';
-import {ReactiveFormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatDialogModule} from '@angular/material';
 
 
 
@@ -15,6 +16,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     AuthRoutingModule,
     AngularFireAuthModule,
     ReactiveFormsModule,
+    MatDialogModule
   ]
 })
 export class AuthModule { }

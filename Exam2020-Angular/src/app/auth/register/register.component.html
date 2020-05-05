@@ -16,4 +16,7 @@
     <input type="password" formControlName="confirmPassword">
   </label>
 </form>
-<button class="btn" (click)="register()">Register</button>
+<button class="btn" (click)="register()" >Register</button>
+<div *ngIf="dialogOpen">
+  <label>Passwords must be atleast 6 characters and matching</label>
+</div>

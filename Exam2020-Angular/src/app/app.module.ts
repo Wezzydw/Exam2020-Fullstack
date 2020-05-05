@@ -17,6 +17,7 @@ import {UserDetailComponent} from './users/user-detail/user-detail.component';
 import {CertificateDetailComponent} from './certificates/certificate-detail/certificate-detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material';
+import {UserState} from './users/shared/user.state';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,9 @@ import {MatInputModule} from '@angular/material';
   ],
   imports: [
     BrowserModule,
-    NgxsModule.forRoot(),
+    NgxsModule.forRoot([
+      UserState,
+    ]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
     AppRoutingModule,

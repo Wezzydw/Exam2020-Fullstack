@@ -13,11 +13,15 @@ import {AngularFireModule} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {NavbarComponent} from './shared/navbar/navbar.component';
+
 import {UserDetailComponent} from './users/user-detail/user-detail.component';
 import {CertificateDetailComponent} from './certificates/certificate-detail/certificate-detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material';
 import {UserState} from './users/shared/user.state';
+
+import {AuthState} from './auth/shared/auth.state';
+
 
 @NgModule({
   declarations: [
@@ -28,6 +32,7 @@ import {UserState} from './users/shared/user.state';
     BrowserModule,
     NgxsModule.forRoot([
       UserState,
+      AuthState
     ]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),

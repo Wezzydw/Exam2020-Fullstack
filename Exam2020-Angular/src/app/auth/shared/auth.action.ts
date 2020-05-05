@@ -4,3 +4,9 @@ export class LoginEmail {
 
   constructor(public email: string, public password: string) {}
 }
+
+export class GetUser {
+  static readonly type = '[Auth] GetUser';
+
+  constructor(public uid: string) {}
+}

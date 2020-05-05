@@ -2,8 +2,8 @@ export interface AuthUser {
   mUId: string;
   mEmail: string;
   mUserName: string;
-  profilePic?: string;
-  certificateList?: string[];
-  phone?: string;
+  mImage?: string;
+  mCertificateList?: string[];
+  mPhone?: string;
   mName?: string;
 }

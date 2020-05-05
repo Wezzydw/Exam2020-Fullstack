@@ -21,6 +21,18 @@ exports.profileImageAdded = functions.storage.object().onFinalize((object) => {
         admin.firestore().collection('files')
           .doc(nameForDoc).set(fileMeta).then(value => resolve(value)).catch(err => reject(err));
         resolve('happy');
+      } else if (object.name.includes('certificates')) {
+        const fileMeta = {
+          lastModified: object.updated,
+          name: object.name,
+          type: 'image/png',
+          size: object.size
+        };
+        const nameForDoc = object.name.split('/')[3];
+        console.log(object.name);
+        admin.firestore().collection('certificatesPic')
+          .doc(nameForDoc).set(fileMeta).then(value => resolve(value)).catch(err => reject(err));
+        resolve('happy');
       }
     }
   })

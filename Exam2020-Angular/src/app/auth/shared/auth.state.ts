@@ -53,8 +53,7 @@ export class AuthState {
         tap((result) => {
           ctx.setState({
             ...state,
-            loggedInUser: result,
-            userName: result.username
+            loggedInUser: result
           });
           // ctx.dispatch()
         })

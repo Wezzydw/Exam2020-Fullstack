@@ -15,6 +15,7 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {NavbarComponent} from './shared/navbar/navbar.component';
 import {UserDetailComponent} from './users/user-detail/user-detail.component';
 import {CertificateDetailComponent} from './certificates/certificate-detail/certificate-detail.component';
+import {AuthState} from './auth/shared/auth.state';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,9 @@ import {CertificateDetailComponent} from './certificates/certificate-detail/cert
   ],
   imports: [
     BrowserModule,
-    NgxsModule.forRoot(),
+    NgxsModule.forRoot([
+      AuthState
+    ]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
     AppRoutingModule,

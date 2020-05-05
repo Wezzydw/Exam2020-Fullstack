@@ -22,7 +22,7 @@ export class UserState {
   static getUser(state: UserStateModel) {
     return state.user;
   }
-  @Action(UpdateUser)
+  /*@Action(UpdateUser)
   update({getState, setState}: StateContext<UserStateModel>, {payload}: UpdateUser) {
     const id = 1;
     return this.userService.updateUser(payload, id).pipe(tap((result) => {
@@ -32,5 +32,5 @@ export class UserState {
       user: result
     });
     }));
-  }
+  }*/
 }

@@ -11,10 +11,10 @@ export class UserService {
 
 
   updateUser(payload: Userstats, id: number) {
-    return this.http.put<Userstats>('https://jsonplaceholder.typicode.com/todos/' + id, payload);
+    return this.http.put<Userstats>('https://jsonplaceholder.typicode.com/users/' + id, payload);
   }
   getUser() {
-    return this.http.get<Userstats>('https://jsonplaceholder.typicode.com/todos');
+    return this.http.get<Userstats>('https://jsonplaceholder.typicode.com/users');
   }
 
 }

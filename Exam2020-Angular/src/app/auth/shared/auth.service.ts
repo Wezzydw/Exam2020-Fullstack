@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import {User} from 'firebase/app';
 import {from, Observable} from 'rxjs';
 import {AuthUser} from './authUser';
-import {map} from 'rxjs/operators';
+import {first, map, tap} from 'rxjs/operators';
 import {UserService} from '../../users/shared/user.service';
 
 @Injectable({
@@ -33,17 +33,26 @@ export class AuthService {
     await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
   }
 
-  private getUser(uid: string): Observable<AuthUser> {
+  getUser(uid: string): Observable<AuthUser> {
     return this.userService.getUser(uid);
     // return undefined;
   }
   firebaseUserToAuthUser(user: User): AuthUser {
-    this.getUser(user.uid);
     if (user) {
+      // return this.getUser(user.uid).pipe(
+      //   first(),
+      //   map(value => {
+      //     return {
+      //       mUId: value.mUId,
+      //       mUserName: value.mUserName,
+      //       mEmail: value.mEmail
+      //     }
+      //   })
+      // );
       return {
-        uid: user.uid,
-        username: user.displayName,
-        email: user.email
+        mUId: user.uid,
+        mUserName: user.displayName,
+        mEmail: user.email
       };
     }
   }

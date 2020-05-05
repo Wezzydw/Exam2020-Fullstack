@@ -11,10 +11,10 @@ export class UserService {
 
   constructor(private af: AngularFirestore) { }
   getUser(uId: string): Observable<AuthUser> {
-    return this.af.doc<AuthUser>('users/' + uId).snapshotChanges().pipe(
+    return this.af.doc<AuthUser>('users/' + uId).get().pipe(
       map(value => {
-        const data = value.payload.data() as AuthUser;
-        data.uid = value.payload.id;
+        const data = value.data() as AuthUser;
+        data.mUId = value.id;
         return data;
       })
     );

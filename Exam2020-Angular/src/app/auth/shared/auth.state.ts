@@ -2,7 +2,7 @@ import {AuthUser} from './authUser';
 import {Injectable} from '@angular/core';
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {AuthService} from './auth.service';
-import {LoginEmail} from './auth.action';
+import {GetUser, LoginEmail} from './auth.action';
 import {tap} from 'rxjs/operators';
 
 export class AuthStateModel {
@@ -37,11 +37,24 @@ export class AuthState {
            ctx.setState({
              ...state,
              loggedInUser: result,
-             userName: result.username
+             userName: result.mUserName
            });
-           // ctx.dispatch()
+           ctx.dispatch(new GetUser(result.mUId));
          })
        );
   }
 
+  @Action(GetUser)
+  getUser(ctx: StateContext<AuthStateModel>, action: GetUser) {
+    const state = ctx.getState();
+    return this.authService.getUser(action.uid).pipe(
+      tap((result) => {
+        ctx.setState({
+          ...state,
+          loggedInUser: result,
+          userName: result.mUserName
+        });
+      })
+    );
+  }
 }

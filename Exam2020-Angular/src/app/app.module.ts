@@ -14,6 +14,7 @@ import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {NavbarComponent} from './shared/navbar/navbar.component';
 import {AuthState} from './auth/shared/auth.state';
+import {NgxsRouterPluginModule} from '@ngxs/router-plugin';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {AuthState} from './auth/shared/auth.state';
     ]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
+    NgxsRouterPluginModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,

@@ -4,6 +4,7 @@ import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {AuthService} from './auth.service';
 import {GetUser, LoginEmail} from './auth.action';
 import {tap} from 'rxjs/operators';
+import {Navigate} from '@ngxs/router-plugin';
 
 export class AuthStateModel {
   loggedInUser: AuthUser;
@@ -40,6 +41,7 @@ export class AuthState {
              userName: result.mUserName
            });
            ctx.dispatch(new GetUser(result.mUId));
+           ctx.dispatch(new Navigate(['/']));
          })
        );
   }

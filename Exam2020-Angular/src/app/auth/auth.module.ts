@@ -9,6 +9,7 @@ import {MatDialogModule} from '@angular/material';
 
 
 
+
 @NgModule({
   declarations: [LoginComponent, RegisterComponent],
   imports: [

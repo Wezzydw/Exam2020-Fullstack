@@ -1,4 +1,3 @@
-
 import {FormControl, FormGroup} from '@angular/forms';
 import {Component, OnInit} from '@angular/core';
 import {AuthUser} from '../shared/authUser';
@@ -17,6 +16,7 @@ export class RegisterComponent implements OnInit {
   user: AuthUser;
   fireUser: User;
   dialogOpen: boolean;
+
 
   userForm = new FormGroup({
     name: new FormControl(''),

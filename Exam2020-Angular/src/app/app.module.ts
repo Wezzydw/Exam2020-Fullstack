@@ -15,15 +15,22 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {NavbarComponent} from './shared/navbar/navbar.component';
 import {UserDetailComponent} from './users/user-detail/user-detail.component';
 import {CertificateDetailComponent} from './certificates/certificate-detail/certificate-detail.component';
+import {AuthState} from './auth/shared/auth.state';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PopuppasswordComponent } from './shared/popuppassword/popuppassword.component';
+import { MatDialogModule} from '@angular/material';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
+    PopuppasswordComponent,
   ],
   imports: [
     BrowserModule,
-    NgxsModule.forRoot(),
+    NgxsModule.forRoot([
+      AuthState
+    ]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
     AppRoutingModule,
@@ -31,7 +38,12 @@ import {CertificateDetailComponent} from './certificates/certificate-detail/cert
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireAuthModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule
+  ],
+  entryComponents: [
+    PopuppasswordComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

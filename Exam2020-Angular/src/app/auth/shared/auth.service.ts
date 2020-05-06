@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
-import {auth, User} from 'firebase/app';
+import {User} from 'firebase/app';
 import {from, Observable} from 'rxjs';
 import {AuthUser} from './authUser';
 import {map} from 'rxjs/operators';
@@ -30,8 +30,11 @@ export class AuthService {
     await this.afAuth.auth.signOut();
     this.router.navigate(['/login']);
   }
-  async registerEmail(email: string, password: string) {
-    await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+  registerUser(email: string, password: string): Observable<AuthUser> {
+    return from(this.afAuth.auth.createUserWithEmailAndPassword(email, password))
+     .pipe(
+       map(credential => this.firebaseUserToAuthUser(credential.user))
+     );
   }
 
   private getUser(uid: string): AuthUser {

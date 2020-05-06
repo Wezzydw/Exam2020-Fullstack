@@ -12,15 +12,10 @@ exports.profileImageAdded = functions.storage.object().onFinalize((object) => {
   return new Promise((resolve, reject) => {
     if (object && object.metadata && object.name) {
       if (object.name.includes('profilePic')){
-        const fileMeta = {
-          lastModified: object.updated,
-          name: object.name,
-          type: 'image/png',
-          size: object.size
-        };
         const nameForDoc = object.name.split('/')[2];
-        admin.firestore().collection('files')
-          .doc(nameForDoc).set(fileMeta).then(value => resolve(value)).catch(err => reject(err));
+        const userId = object.name.split('/')[1];
+        admin.firestore().collection('users')
+          .doc(userId).update('mImage', nameForDoc).then(value => resolve(value)).catch(err => reject(err));
         resolve('happy');
       } else {
         //do nothing

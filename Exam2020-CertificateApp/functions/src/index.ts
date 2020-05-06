@@ -7,6 +7,7 @@ admin.initializeApp();
 export const buubu = functions.https.onRequest((request, response) => {
  response.send("Hello from Firebase!");
 });
+
 exports.profileImageAdded = functions.storage.object().onFinalize((object) => {
   return new Promise((resolve, reject) => {
     if (object && object.metadata && object.name) {
@@ -22,16 +23,12 @@ exports.profileImageAdded = functions.storage.object().onFinalize((object) => {
           .doc(nameForDoc).set(fileMeta).then(value => resolve(value)).catch(err => reject(err));
         resolve('happy');
       } else if (object.name.includes('certificates')) {
-        const fileMeta = {
-          lastModified: object.updated,
-          name: object.name,
-          type: 'image/png',
-          size: object.size
-        };
-        const nameForDoc = object.name.split('/')[3];
+
+        const nameForDoc = object.name.split('/')[1];
+        const bitmap = object.name.split('/')[3];
         console.log(object.name);
-        admin.firestore().collection('certificatesPic')
-          .doc(nameForDoc).set(fileMeta).then(value => resolve(value)).catch(err => reject(err));
+        admin.firestore().collection('certificates')
+          .doc(nameForDoc).update({mBitmap: bitmap}).then(value => resolve(value)).catch(err => reject(err));
         resolve('happy');
       }
     }

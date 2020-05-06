@@ -2,8 +2,8 @@ import {AuthUser} from './authUser';
 import {Injectable} from '@angular/core';
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {AuthService} from './auth.service';
-import {GetUser, LoginEmail, UpdateUser} from './auth.action';
-import {tap} from 'rxjs/operators';
+import {GetImage, GetUser, LoginEmail, UpdateUser,} from './auth.action';
+import {map, tap} from 'rxjs/operators';
 import {UserStateModel} from '../../users/shared/user.state';
 import {UserService} from '../../users/shared/user.service';
 
@@ -60,16 +60,34 @@ export class AuthState {
     );
   }
   @Action(UpdateUser)
-  update({getState, setState}: StateContext<AuthStateModel>, {payload}: UpdateUser) {
-    if (this.userService.updateUser(payload)) {
-      const state = getState();
+  update(ctx: StateContext<AuthStateModel>, {payload, image}: UpdateUser) {
+    if (image != null) {
+      console.log('ImagenotNull');
+      this.userService.uploadImage(image, payload.mUId);
+      this.userService.updateUser(payload);
+    }
+    const user = AuthState.loggedInUser(ctx.getState());
+
+    return this.userService.getImage(payload.mUId).pipe(tap( result => {
+      user.mImageUrl = result;
+      user.mPhone = '1231231212312312';
+      ctx.setState({
+        ...ctx.getState(),
+        loggedInUser: user
+      });
+    }));
+    //ctx.dispatch(new GetImage(payload.mUId));
+  }
+  @Action(GetImage)
+  getImage({getState, setState}: StateContext<AuthStateModel>, {uid}: GetUser) {
+
+    const state = getState();
+    return this.userService.getImage(uid).pipe(tap( result => {
       setState({
         ...state,
-        loggedInUser: payload
+        role: result
       });
-      return true;
-    } else {
-      return false;
-    }
+    }));
   }
+
 }

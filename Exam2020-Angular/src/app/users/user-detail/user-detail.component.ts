@@ -5,7 +5,7 @@ import {Select, Store} from '@ngxs/store';
 import {GetUser, } from '../shared/user.actions';
 import {UserState} from '../shared/user.state';
 import {Observable} from 'rxjs';
-import {LoginEmail, UpdateUser} from '../../auth/shared/auth.action';
+import {GetImage, LoginEmail, UpdateUser} from '../../auth/shared/auth.action';
 import {AuthUser} from '../../auth/shared/authUser';
 import {AuthState} from '../../auth/shared/auth.state';
 
@@ -20,7 +20,7 @@ export class UserDetailComponent implements OnInit {
   loggedInUser$: Observable<AuthUser>;
   payload: AuthUser;
   userSub: AuthUser;
-
+  image: File;
   userSettings;
   userForm;
   constructor(private formBuilder: FormBuilder, private store: Store) {this.userForm = this.formBuilder.group({
@@ -35,12 +35,14 @@ export class UserDetailComponent implements OnInit {
     this.store.dispatch(new GetUser());
     this.loggedInUser$.subscribe(res => {
       this.userSub = res;
+
     });
+
   }
 
   onSubmit(data) {
     if (data.phone === '') {
-      this.userForm.value.phone = this.userSub.mPhone;
+      this.userForm.value.phone = this.userSub.mPhone.toString();
     }
     if (data.email === '') {
       this.userForm.value.email = this.userSub.mEmail;
@@ -57,7 +59,7 @@ export class UserDetailComponent implements OnInit {
         mEmail: data.email,
         mUId: this.userSub.mUId,
         mUserName: data.username,
-        mPhone: data.phone,
+        mPhone: data.phone.toString(),
       }
 
       //this.payload.mPhone = data.phone;
@@ -68,10 +70,13 @@ export class UserDetailComponent implements OnInit {
       //this.editUserData(this.payload);
       console.log('payload', bar);
     this.editUserData(bar);
+    this.loggedInUser$.subscribe(res => {
+      this.userSub = res;
+    });
   }
 
   editUserData(payload: AuthUser) {
-    if (this.store.dispatch(new UpdateUser(payload))) {
+    if (this.store.dispatch(new UpdateUser(payload, this.image))) {
       console.log('Succes saving changes');
     } else {
       console.log('saving not successfullyyyllllulyy');
@@ -81,5 +86,13 @@ export class UserDetailComponent implements OnInit {
   login() {
     console.warn('login');
     this.store.dispatch(new LoginEmail('a@hotmail.com', '12345678'));
+  }
+
+  imageFileSet(event) {
+    this.image = event.target.files[0];
+  }
+
+  getProfilePic(uid: string) {
+    this.store.dispatch(new GetImage(uid));
   }
 }

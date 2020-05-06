@@ -30,6 +30,7 @@
     <input matInput placeholder="Phone" id="phone" type="number" formControlName="phone" value="{{user.mPhone}}">
     <mat-hint>Hint</mat-hint>
   </mat-form-field>
+  <input type="file" (change)="imageFileSet($event)">
   <button mat-raised-button color="primary">Submit</button>
 
 
@@ -38,3 +39,5 @@
 
 </div>
 <button mat-raised-button color="primary" (click)="login()">Submit</button>
+
+<img [src]="userSub.mImageUrl" *ngIf="userSub.mImageUrl">

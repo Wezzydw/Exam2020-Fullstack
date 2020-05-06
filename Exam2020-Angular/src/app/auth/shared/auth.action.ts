@@ -13,6 +13,11 @@ export class GetUser {
 }
 export class UpdateUser {
   static readonly type = '[Auth] Update';
-  constructor(public payload: AuthUser) {
+  constructor(public payload: AuthUser, public image: File) {
+  }
+}
+export class GetImage {
+  static readonly type = '[Auth] GetImage';
+  constructor(public uid: string) {
   }
 }

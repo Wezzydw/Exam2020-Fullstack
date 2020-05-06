@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Certificate} from '../shared/certificate';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {Store} from '@ngxs/store';
 
 @Component({
@@ -11,15 +11,17 @@ import {Store} from '@ngxs/store';
 export class CertificateAddComponent implements OnInit {
 private certificate: Certificate;
 
+
   userForm;
   constructor(private formBuilder: FormBuilder, private store: Store) {this.userForm = this.formBuilder.group({
     name: '',
-    username: '',
-    phone: '',
-    email: '',
-    password: ''
+    mExpirationDate: '',
+    mPhoto: ''
   }); }
   ngOnInit() {
   }
 
+  onSubmit(value: any) {
+
+  }
 }

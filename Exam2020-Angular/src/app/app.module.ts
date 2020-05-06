@@ -16,6 +16,7 @@ import {NavbarComponent} from './shared/navbar/navbar.component';
 import {UserDetailComponent} from './users/user-detail/user-detail.component';
 import {CertificateDetailComponent} from './certificates/certificate-detail/certificate-detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatInputModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AngularFireStorageModule,
     AngularFireAuthModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

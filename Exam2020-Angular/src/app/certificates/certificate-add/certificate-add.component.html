@@ -1,2 +1,9 @@
-<p>certificate-add works!</p>
-<
+<form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm.value)">
+  <mat-form-field appearance="standard">
+    <mat-label>
+      {{certificate.mName}}
+    </mat-label>
+    <input matInput placeholder="Name" id="name" type="text" formControlName="name" value="{{user.mName}}">
+    <mat-hint>Hint</mat-hint>
+  </mat-form-field>
+</form>

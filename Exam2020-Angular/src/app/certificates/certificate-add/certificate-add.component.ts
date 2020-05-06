@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Certificate} from '../shared/certificate';
+import {FormBuilder} from '@angular/forms';
+import {Store} from '@ngxs/store';
 
 @Component({
   selector: 'app-certificate-add',
@@ -6,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./certificate-add.component.css']
 })
 export class CertificateAddComponent implements OnInit {
+private certificate: Certificate;
 
-  constructor() { }
-
+  userForm;
+  constructor(private formBuilder: FormBuilder, private store: Store) {this.userForm = this.formBuilder.group({
+    name: '',
+    username: '',
+    phone: '',
+    email: '',
+    password: ''
+  }); }
   ngOnInit() {
   }
 

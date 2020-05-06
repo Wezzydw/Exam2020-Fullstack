@@ -5,7 +5,7 @@ import {CertificateAddComponent} from './certificate-add/certificate-add.compone
 
 const routes: Routes = [
   { path: '', component: CertificateDetailComponent},
-  { path: 'test', component: CertificateAddComponent}
+  { path: 'add', component: CertificateAddComponent}
 ];
 
 @NgModule({

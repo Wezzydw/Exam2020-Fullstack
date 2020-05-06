@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {Userstats} from '../shared/userstats';
 import {Select, Store} from '@ngxs/store';
-import {GetUser, UpdateUser} from '../shared/user.actions';
+import {GetUser, } from '../shared/user.actions';
 import {UserState} from '../shared/user.state';
 import {Observable} from 'rxjs';
-import {LoginEmail} from '../../auth/shared/auth.action';
+import {LoginEmail, UpdateUser} from '../../auth/shared/auth.action';
 import {AuthUser} from '../../auth/shared/authUser';
 import {AuthState} from '../../auth/shared/auth.state';
 
@@ -15,11 +15,11 @@ import {AuthState} from '../../auth/shared/auth.state';
   styleUrls: ['./user-detail.component.css']
 })
 export class UserDetailComponent implements OnInit {
- @Select(UserState.getUser)
- user$: Observable<Userstats>;
+
   @Select(AuthState.loggedInUser)
   loggedInUser$: Observable<AuthUser>;
-
+  payload: AuthUser;
+  userSub: AuthUser;
 
   userSettings;
   userForm;
@@ -33,16 +33,44 @@ export class UserDetailComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new GetUser());
-    console.warn('BS', this.loggedInUser$);
+    this.loggedInUser$.subscribe(res => {
+      this.userSub = res;
+    });
   }
 
   onSubmit(data) {
-    console.warn('Data: ', this.loggedInUser$);
-    console.warn('login');
-    this.store.dispatch(new LoginEmail('a@hotmail.com', '12345678'));
+    if (data.phone === '') {
+      this.userForm.value.phone = this.userSub.mPhone;
+    }
+    if (data.email === '') {
+      this.userForm.value.email = this.userSub.mEmail;
+    }
+    if (data.username === '') {
+      this.userForm.value.username = this.userSub.mUserName;
+    }
+    if (data.name === '') {
+      this.userForm.value.name = this.userSub.mName;
+    }
+    console.warn('BS', this.userSub);
+    const bar: AuthUser = {
+        mName: data.name,
+        mEmail: data.email,
+        mUId: this.userSub.mUId,
+        mUserName: data.username,
+        mPhone: data.phone,
+      }
+
+      //this.payload.mPhone = data.phone;
+      //this.payload.mEmail = data.email;
+      //this.payload.mUserName = data.username;
+      //this.payload.mName = data.name;
+      //this.payload.mUId = this.userSub.mUId;
+      //this.editUserData(this.payload);
+      console.log('payload', bar);
+    this.editUserData(bar);
   }
 
-  editUserData(payload: Userstats) {
+  editUserData(payload: AuthUser) {
     this.store.dispatch(new UpdateUser(payload));
   }
 

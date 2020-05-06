@@ -6,28 +6,28 @@
   <mat-label>
    {{user.mName}}
   </mat-label>
-  <input matInput placeholder="Name" id="name" type="text" formControlName="name">
+  <input matInput placeholder="Name" id="name" type="text" formControlName="name" value="{{user.mName}}">
   <mat-hint>Hint</mat-hint>
 </mat-form-field>
   <mat-form-field appearance="standard">
     <mat-label>
       {{user.mUserName}}
     </mat-label>
-    <input matInput placeholder="Username" id="username" type="text" formControlName="username">
+    <input matInput placeholder="Username" id="username" type="text" formControlName="username" value="{{user.mUserName}}">
     <mat-hint>Hint</mat-hint>
   </mat-form-field>
   <mat-form-field appearance="standard">
     <mat-label>
       {{user.mEmail}}
     </mat-label>
-    <input matInput placeholder="Email" id="email" type="text" formControlName="email">
+    <input matInput placeholder="Email" id="email" type="text" formControlName="email" value="{{user.mEmail}}">
     <mat-hint>Hint</mat-hint>
   </mat-form-field>
   <mat-form-field appearance="standard">
     <mat-label>
       {{user.mPhone}}
     </mat-label>
-    <input matInput placeholder="Phone" id="phone" type="number" formControlName="phone">
+    <input matInput placeholder="Phone" id="phone" type="number" formControlName="phone" value="{{user.mPhone}}">
     <mat-hint>Hint</mat-hint>
   </mat-form-field>
   <button mat-raised-button color="primary">Submit</button>

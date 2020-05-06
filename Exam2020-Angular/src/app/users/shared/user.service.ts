@@ -6,7 +6,7 @@ import {HttpClient} from '@angular/common/http';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AuthUser} from '../../auth/shared/authUser';
 import {map} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {from, Observable} from 'rxjs';
 
 
 @Injectable({
@@ -23,5 +23,9 @@ export class UserService {
         return data;
       })
     );
+  }
+
+  updateUser(payload: AuthUser): void {
+    from(this.af.doc<AuthUser>('users/' + payload.mUId).update(payload));
   }
 }

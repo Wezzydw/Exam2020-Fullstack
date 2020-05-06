@@ -1,11 +1,11 @@
 import { State, Action, StateContext, Selector} from '@ngxs/store';
 import {Userstats} from './userstats';
-import {UpdateUser} from './user.actions';
 import {UserService} from './user.service';
 import {tap} from 'rxjs/operators';
+import {AuthUser} from '../../auth/shared/authUser';
 
 export class UserStateModel {
-  user: Userstats;
+  user: AuthUser;
 }
 
 @State<UserStateModel> ({
@@ -22,15 +22,15 @@ export class UserState {
   static getUser(state: UserStateModel) {
     return state.user;
   }
+
   /*@Action(UpdateUser)
-  update({getState, setState}: StateContext<UserStateModel>, {payload}: UpdateUser) {
-    const id = 1;
-    return this.userService.updateUser(payload, id).pipe(tap((result) => {
-    const state = getState();
-    setState({
-      ...state,
-      user: result
-    });
-    }));
-  }*/
+   update({getState, setState}: StateContext<UserStateModel>, {payload}: UpdateUser) {
+     this.userService.updateUser(payload);
+     const state = getState();
+     setState({
+        ...state,
+       //loggedInUser: payload
+      });
+
+   }*/
 }

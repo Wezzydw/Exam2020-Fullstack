@@ -1,10 +1,7 @@
 import {Userstats} from './userstats';
+import {AuthUser} from '../../auth/shared/authUser';
 
-export class UpdateUser {
-  static readonly type = '[USERSTAT] Update';
-  constructor(public payload: Userstats) {
-  }
-}
+
 
 export class GetUser {
   static readonly type = '[USERSTAT] Get';

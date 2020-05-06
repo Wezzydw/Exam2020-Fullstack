@@ -71,7 +71,11 @@ export class UserDetailComponent implements OnInit {
   }
 
   editUserData(payload: AuthUser) {
-    this.store.dispatch(new UpdateUser(payload));
+    if (this.store.dispatch(new UpdateUser(payload))) {
+      console.log('Succes saving changes');
+    } else {
+      console.log('saving not successfullyyyllllulyy');
+    }
   }
 
   login() {

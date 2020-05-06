@@ -25,7 +25,11 @@ export class UserService {
     );
   }
 
-  updateUser(payload: AuthUser): void {
-    from(this.af.doc<AuthUser>('users/' + payload.mUId).update(payload));
+  updateUser(payload: AuthUser): Promise<boolean> {
+    return this.af.doc<AuthUser>('users/' + payload.mUId).update(payload).then(a => {
+      return true;
+    }).catch(a => {
+      return false;
+    });
   }
 }

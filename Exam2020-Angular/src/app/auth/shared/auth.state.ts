@@ -61,12 +61,15 @@ export class AuthState {
   }
   @Action(UpdateUser)
   update({getState, setState}: StateContext<AuthStateModel>, {payload}: UpdateUser) {
-    this.userService.updateUser(payload);
-    const state = getState();
-    setState({
-      ...state,
-      loggedInUser: payload
-    });
-
+    if (this.userService.updateUser(payload)) {
+      const state = getState();
+      setState({
+        ...state,
+        loggedInUser: payload
+      });
+      return true;
+    } else {
+      return false;
+    }
   }
 }

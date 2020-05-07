@@ -1,1 +1,9 @@
-<p>certificate-list works!</p>
+<div>
+  <div>
+    <ul>
+      <li *ngFor="let certificate of certificates | async">
+          {{certificate.mName}} -- {{certificate.mUId}}
+      </li>
+    </ul>
+  </div>
+</div>

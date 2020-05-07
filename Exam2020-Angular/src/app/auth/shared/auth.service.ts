@@ -25,9 +25,8 @@ export class AuthService {
         map(credential => this.firebaseUserToAuthUser(credential.user))
       );
   }
-  async logOut() {
-    await this.afAuth.auth.signOut();
-    this.router.navigate(['/login']);
+   logOut(): Observable<void> {
+    return from(this.afAuth.auth.signOut());
   }
   async registerEmail(email: string, password: string) {
     await this.afAuth.auth.createUserWithEmailAndPassword(email, password);

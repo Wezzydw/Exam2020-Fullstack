@@ -1,17 +1,26 @@
-<p>login works!</p>
-<div>
+
+<div *ngIf="loggedInUser$ | async; then authenticated else guest">
 
 </div>
-<div>
-  <form [formGroup]="loginForm">
-  <label>
-    Email:
-    <input type="text" formControlName="email">
-  </label>
-  <label>
-    Password:
-    <input type="password" formControlName="password">
-  </label>
-  <button (click)="loginWithEmail()">Log in</button>
-  </form>
-</div>
+<ng-template #guest>
+  <div>
+    <form [formGroup]="loginForm">
+      <label>
+        Email:
+        <input type="text" formControlName="email">
+      </label>
+      <label>
+        Password:
+        <input type="password" formControlName="password">
+      </label>
+      <button (click)="loginWithEmail()">Log in</button>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #authenticated>
+  <div *ngIf="loggedInUser$ | async as user">
+    <h1>You are logged in as {{user.mEmail}}</h1>
+    <button (click)="logOut()">Log out</button>
+  </div>
+</ng-template>

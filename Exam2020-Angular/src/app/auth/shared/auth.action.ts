@@ -10,3 +10,9 @@ export class GetUser {
 
   constructor(public uid: string) {}
 }
+
+export class LogOut {
+  static readonly type = '[Auth] LogOut';
+
+  constructor() {}
+}

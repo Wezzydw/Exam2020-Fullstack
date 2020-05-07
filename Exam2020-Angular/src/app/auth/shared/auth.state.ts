@@ -2,7 +2,7 @@ import {AuthUser} from './authUser';
 import {Injectable} from '@angular/core';
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {AuthService} from './auth.service';
-import {GetUser, LoginEmail} from './auth.action';
+import {GetUser, LoginEmail, LogOut} from './auth.action';
 import {tap} from 'rxjs/operators';
 import {Navigate} from '@ngxs/router-plugin';
 
@@ -56,6 +56,20 @@ export class AuthState {
           loggedInUser: result,
           userName: result.mUserName
         });
+      })
+    );
+  }
+  @Action(LogOut)
+  logOut(ctx: StateContext<AuthStateModel>) {
+    const state = ctx.getState();
+    return this.authService.logOut().pipe(
+      tap((result) => {
+        ctx.setState({
+          ...state,
+          loggedInUser: undefined,
+          userName: undefined
+        });
+        ctx.dispatch(new Navigate(['auth']));
       })
     );
   }

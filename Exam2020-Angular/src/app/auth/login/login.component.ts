@@ -4,8 +4,8 @@ import {Select, Store} from '@ngxs/store';
 import {AuthState} from '../shared/auth.state';
 import {AuthUser} from '../shared/authUser';
 import {Observable} from 'rxjs';
-import {LoginEmail} from '../shared/auth.action';
-import {AuthService} from "../shared/auth.service";
+import {LoginEmail, LogOut} from '../shared/auth.action';
+import {AuthService} from '../shared/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -33,5 +33,8 @@ export class LoginComponent implements OnInit {
     const password = this.loginForm.get('password').value;
     // this.authService.logInEmail(email, password);
     this.store.dispatch(new LoginEmail(email, password));
+  }
+  logOut() {
+    this.store.dispatch(new LogOut());
   }
 }

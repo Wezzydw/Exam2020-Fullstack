@@ -19,9 +19,10 @@ export class UpdateUser {
 }
 export class GetImage {
   static readonly type = '[Auth] GetImage';
+
   constructor(public uid: string) {
   }
-
+}
 export class LogOut {
   static readonly type = '[Auth] LogOut';
 

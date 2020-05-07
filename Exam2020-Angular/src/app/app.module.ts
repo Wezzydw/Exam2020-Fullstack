@@ -13,17 +13,12 @@ import {AngularFireModule} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {NavbarComponent} from './shared/navbar/navbar.component';
-import {UserDetailComponent} from './users/user-detail/user-detail.component';
-import {CertificateDetailComponent} from './certificates/certificate-detail/certificate-detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material';
 import {UserState} from './users/shared/user.state';
 import {NgxsRouterPluginModule} from '@ngxs/router-plugin';
 import {NgxsStoragePluginModule} from '@ngxs/storage-plugin';
-import {UserDetailComponent} from './users/user-detail/user-detail.component';
-import {CertificateDetailComponent} from './certificates/certificate-detail/certificate-detail.component';
 import {AuthState} from './auth/shared/auth.state';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PopuppasswordComponent } from './shared/popuppassword/popuppassword.component';
 import { MatDialogModule} from '@angular/material';
 
@@ -53,7 +48,7 @@ import { MatDialogModule} from '@angular/material';
     AngularFireAuthModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatInputModule
+    MatInputModule,
     MatDialogModule
   ],
   entryComponents: [

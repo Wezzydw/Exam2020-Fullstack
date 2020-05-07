@@ -3,13 +3,9 @@ import {Injectable} from '@angular/core';
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {AuthService} from './auth.service';
 
-import {GetImage, GetUser, LoginEmail, UpdateUser,} from './auth.action';
-import {map, tap} from 'rxjs/operators';
-import {UserStateModel} from '../../users/shared/user.state';
-import {UserService} from '../../users/shared/user.service';
-
-import {GetUser, LoginEmail, LogOut, RegisterUser} from './auth.action';
+import {GetImage, GetUser, LoginEmail, UpdateUser, LogOut, RegisterUser} from './auth.action';
 import {tap} from 'rxjs/operators';
+import {UserService} from '../../users/shared/user.service';
 import {Navigate} from '@ngxs/router-plugin';
 
 

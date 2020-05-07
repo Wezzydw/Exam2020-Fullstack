@@ -72,9 +72,7 @@ export class UserDetailComponent implements OnInit {
       //this.editUserData(this.payload);
       console.log('payload', bar);
     this.editUserData(bar);
-    this.loggedInUser$.subscribe(res => {
-      this.userSub = res;
-    });
+
   }
 
   editUserData(payload: AuthUser) {

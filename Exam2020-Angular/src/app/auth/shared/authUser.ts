@@ -6,4 +6,5 @@ export interface AuthUser {
   mCertificateList?: string[];
   mPhone?: string;
   mName?: string;
+  mImageUrl?: string;
 }

@@ -12,6 +12,16 @@ export class GetUser {
   constructor(public uid: string) {}
 }
 
+export class UpdateUser {
+  static readonly type = '[Auth] Update';
+  constructor(public payload: AuthUser, public image: File) {
+  }
+}
+export class GetImage {
+  static readonly type = '[Auth] GetImage';
+  constructor(public uid: string) {
+  }
+
 export class LogOut {
   static readonly type = '[Auth] LogOut';
 
@@ -22,4 +32,5 @@ export class RegisterUser {
   static readonly type = '[Auth] RegisterUser';
 
   constructor(public name: string, public email: string, public userName: string, public password: string) {}
+
 }

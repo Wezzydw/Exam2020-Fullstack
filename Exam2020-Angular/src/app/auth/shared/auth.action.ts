@@ -15,8 +15,9 @@ export class GetUser {
 export class LogOut {
   static readonly type = '[Auth] LogOut';
 
-  constructor() {}
-  
+  constructor() {
+  }
+}
 export class RegisterUser {
   static readonly type = '[Auth] RegisterUser';
 

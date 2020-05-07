@@ -25,12 +25,14 @@ export class AuthService {
         map(credential => this.firebaseUserToAuthUser(credential.user))
       );
   }
-  async logOut() {
-    await this.afAuth.auth.signOut();
-    this.router.navigate(['/login']);
+   logOut(): Observable<void> {
+    return from(this.afAuth.auth.signOut());
   }
-  async registerEmail(email: string, password: string) {
-    await this.afAuth.auth.createUserWithEmailAndPassword(email, password);
+  registerUser(email: string, password: string): Observable<AuthUser> {
+    return from(this.afAuth.auth.createUserWithEmailAndPassword(email, password))
+     .pipe(
+       map(credential => this.firebaseUserToAuthUser(credential.user))
+     );
   }
 
   getUser(uid: string): Observable<AuthUser> {

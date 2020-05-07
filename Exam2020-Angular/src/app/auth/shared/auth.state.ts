@@ -2,10 +2,16 @@ import {AuthUser} from './authUser';
 import {Injectable} from '@angular/core';
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {AuthService} from './auth.service';
+
 import {GetImage, GetUser, LoginEmail, UpdateUser,} from './auth.action';
 import {map, tap} from 'rxjs/operators';
 import {UserStateModel} from '../../users/shared/user.state';
 import {UserService} from '../../users/shared/user.service';
+
+import {GetUser, LoginEmail, LogOut, RegisterUser} from './auth.action';
+import {tap} from 'rxjs/operators';
+import {Navigate} from '@ngxs/router-plugin';
+
 
 export class AuthStateModel {
   loggedInUser: AuthUser;
@@ -42,6 +48,7 @@ export class AuthState {
              userName: result.mUserName
            });
            ctx.dispatch(new GetUser(result.mUId));
+           ctx.dispatch(new Navigate(['/']));
          })
        );
   }
@@ -59,6 +66,7 @@ export class AuthState {
       })
     );
   }
+
   @Action(UpdateUser)
   update(ctx: StateContext<AuthStateModel>, {payload, image}: UpdateUser) {
     if (image != null) {
@@ -104,6 +112,36 @@ export class AuthState {
     //     role: result
     //   });
     // }));
+  }
+
+  @Action(LogOut)
+  logOut(ctx: StateContext<AuthStateModel>) {
+    const state = ctx.getState();
+    return this.authService.logOut().pipe(
+      tap((result) => {
+        ctx.setState({
+          ...state,
+          loggedInUser: undefined,
+          userName: undefined
+        });
+        ctx.dispatch(new Navigate(['auth']));
+      })
+    );
+  }
+  @Action(RegisterUser)
+  registerUser(ctx: StateContext<AuthStateModel>, action: RegisterUser) {
+    const state = ctx.getState();
+    return this.authService
+      .registerUser(action.email, action.password)
+      .pipe(
+        tap((result) => {
+          ctx.setState({
+            ...state,
+            loggedInUser: result
+          });
+          // ctx.dispatch()
+        })
+      );
   }
 
 }

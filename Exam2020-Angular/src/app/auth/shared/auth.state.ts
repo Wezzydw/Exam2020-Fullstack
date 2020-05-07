@@ -64,16 +64,17 @@ export class AuthState {
     if (image != null) {
       console.log('ImagenotNull');
       this.userService.uploadImage(image, payload.mUId);
-      this.userService.updateUser(payload);
+
     }
+    this.userService.updateUser(payload);
     const user = AuthState.loggedInUser(ctx.getState());
 
     return this.userService.getImage(payload.mUId).pipe(tap( result => {
-      user.mImageUrl = result;
-      user.mPhone = '1231231212312312';
+      console.log('before ctx')
+      payload.mImageUrl = result;
       ctx.setState({
         ...ctx.getState(),
-        loggedInUser: user
+        loggedInUser: payload
       });
     }));
     //ctx.dispatch(new GetImage(payload.mUId));

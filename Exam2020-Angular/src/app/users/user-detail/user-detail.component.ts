@@ -35,9 +35,7 @@ export class UserDetailComponent implements OnInit {
     this.store.dispatch(new GetUser());
     this.loggedInUser$.subscribe(res => {
       this.userSub = res;
-
     });
-
   }
 
   onSubmit(data) {
@@ -53,6 +51,7 @@ export class UserDetailComponent implements OnInit {
     if (data.name === '') {
       this.userForm.value.name = this.userSub.mName;
     }
+
     console.warn('BS', this.userSub);
     const bar: AuthUser = {
         mName: data.name,
@@ -61,6 +60,9 @@ export class UserDetailComponent implements OnInit {
         mUserName: data.username,
         mPhone: data.phone.toString(),
       }
+    if (this.image == null) {
+        bar.mImageUrl = this.userSub.mImageUrl;
+    }
 
       //this.payload.mPhone = data.phone;
       //this.payload.mEmail = data.email;

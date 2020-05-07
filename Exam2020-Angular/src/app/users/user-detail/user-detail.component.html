@@ -36,8 +36,8 @@
 
 
 </form>
-
+  <img [src]="user.mImageUrl" height="200px" *ngIf="user.mImageUrl">
 </div>
 <button mat-raised-button color="primary" (click)="login()">Submit</button>
 
-<img [src]="userSub.mImageUrl" *ngIf="userSub.mImageUrl">
+

@@ -2,8 +2,9 @@ import {AuthUser} from './authUser';
 import {Injectable} from '@angular/core';
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {AuthService} from './auth.service';
-import {LoginEmail, RegisterUser} from './auth.action';
+import {GetUser, LoginEmail, LogOut, RegisterUser} from './auth.action';
 import {tap} from 'rxjs/operators';
+import {Navigate} from '@ngxs/router-plugin';
 
 export class AuthStateModel {
   loggedInUser: AuthUser;
@@ -37,13 +38,41 @@ export class AuthState {
            ctx.setState({
              ...state,
              loggedInUser: result,
-             userName: result.username
+             userName: result.mUserName
            });
-           // ctx.dispatch()
+           ctx.dispatch(new GetUser(result.mUId));
+           ctx.dispatch(new Navigate(['/']));
          })
        );
   }
 
+  @Action(GetUser)
+  getUser(ctx: StateContext<AuthStateModel>, action: GetUser) {
+    const state = ctx.getState();
+    return this.authService.getUser(action.uid).pipe(
+      tap((result) => {
+        ctx.setState({
+          ...state,
+          loggedInUser: result,
+          userName: result.mUserName
+        });
+      })
+    );
+  }
+  @Action(LogOut)
+  logOut(ctx: StateContext<AuthStateModel>) {
+    const state = ctx.getState();
+    return this.authService.logOut().pipe(
+      tap((result) => {
+        ctx.setState({
+          ...state,
+          loggedInUser: undefined,
+          userName: undefined
+        });
+        ctx.dispatch(new Navigate(['auth']));
+      })
+    );
+  }
   @Action(RegisterUser)
   registerUser(ctx: StateContext<AuthStateModel>, action: RegisterUser) {
     const state = ctx.getState();
@@ -59,5 +88,4 @@ export class AuthState {
         })
       );
   }
-
 }

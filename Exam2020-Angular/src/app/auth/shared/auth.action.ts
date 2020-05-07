@@ -1,3 +1,4 @@
+import {AuthUser} from './authUser';
 
 export class LoginEmail {
   static readonly type = '[Auth] LoginEmail';
@@ -15,4 +16,9 @@ export class LogOut {
   static readonly type = '[Auth] LogOut';
 
   constructor() {}
+  
+export class RegisterUser {
+  static readonly type = '[Auth] RegisterUser';
+
+  constructor(public name: string, public email: string, public userName: string, public password: string) {}
 }

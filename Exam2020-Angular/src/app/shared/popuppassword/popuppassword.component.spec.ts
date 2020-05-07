@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CertificateDetailComponent } from './certificate-detail.component';
+import { PopuppasswordComponent } from './popuppassword.component';
 
-describe('CertificateDetailComponent', () => {
-  let component: CertificateDetailComponent;
-  let fixture: ComponentFixture<CertificateDetailComponent>;
+describe('PopuppasswordComponent', () => {
+  let component: PopuppasswordComponent;
+  let fixture: ComponentFixture<PopuppasswordComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CertificateDetailComponent ]
+      declarations: [ PopuppasswordComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CertificateDetailComponent);
+    fixture = TestBed.createComponent(PopuppasswordComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -15,6 +15,7 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {NavbarComponent} from './shared/navbar/navbar.component';
 import {AuthState} from './auth/shared/auth.state';
 import {NgxsRouterPluginModule} from '@ngxs/router-plugin';
+import {NgxsStoragePluginModule} from '@ngxs/storage-plugin';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,9 @@ import {NgxsRouterPluginModule} from '@ngxs/router-plugin';
     NgxsModule.forRoot([
       AuthState
     ]),
+    NgxsStoragePluginModule.forRoot({
+      key: 'auth'
+    }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
     NgxsRouterPluginModule.forRoot(),

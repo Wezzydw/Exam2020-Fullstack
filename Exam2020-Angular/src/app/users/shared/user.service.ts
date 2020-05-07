@@ -8,6 +8,7 @@ import {AuthUser} from '../../auth/shared/authUser';
 import {map} from 'rxjs/operators';
 import {from, Observable} from 'rxjs';
 import {AngularFireStorage} from '@angular/fire/storage';
+import {promisify} from 'util';
 
 
 @Injectable({
@@ -32,10 +33,15 @@ export class UserService {
     }));
 
   }
-  uploadImage(payload: File, uid: string) {
-    this.as.ref('images/' + uid + '/profilePicture').put(payload);
+  uploadImage(payload: File, uid: string): Promise<any> {
+    console.log('before promise')
+    return this.as.ref('images/' + uid + '/profilePicture').put(payload).then(a => {
+      console.log('in promise');
+      return a;
+    });
+
   }
-  getImage(uid: string): Observable<string>  {
-    return this.as.ref('images/' + uid + '/profilePicture').getDownloadURL();
+  getImage(uid: string): Promise<string>  {
+    return this.as.ref('images/' + uid + '/profilePicture').getDownloadURL().toPromise();
   }
 }

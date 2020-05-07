@@ -63,32 +63,47 @@ export class AuthState {
   update(ctx: StateContext<AuthStateModel>, {payload, image}: UpdateUser) {
     if (image != null) {
       console.log('ImagenotNull');
-      this.userService.uploadImage(image, payload.mUId);
-
-    }
-    this.userService.updateUser(payload);
-    const user = AuthState.loggedInUser(ctx.getState());
-
-    return this.userService.getImage(payload.mUId).pipe(tap( result => {
-      console.log('before ctx')
-      payload.mImageUrl = result;
-      ctx.setState({
-        ...ctx.getState(),
-        loggedInUser: payload
+      this.userService.uploadImage(image, payload.mUId).then( a => {
+        console.log('waiting', a);
+        this.userService.updateUser(payload);
+        const user = AuthState.loggedInUser(ctx.getState());
+        console.log('before getimage');
+        return this.userService.getImage(payload.mUId).then(result => {
+          console.log('before ctx')
+          payload.mImageUrl = result;
+          ctx.setState({
+            ...ctx.getState(),
+            loggedInUser: payload
+          });
+        });
       });
-    }));
+
+    } else {
+      this.userService.updateUser(payload);
+      const user = AuthState.loggedInUser(ctx.getState());
+      console.log('before getimage');
+      return this.userService.getImage(payload.mUId).then(result => {
+        console.log('before ctx')
+        payload.mImageUrl = result;
+        ctx.setState({
+          ...ctx.getState(),
+          loggedInUser: payload
+        });
+      });
+    }
+
     //ctx.dispatch(new GetImage(payload.mUId));
   }
   @Action(GetImage)
   getImage({getState, setState}: StateContext<AuthStateModel>, {uid}: GetUser) {
 
     const state = getState();
-    return this.userService.getImage(uid).pipe(tap( result => {
-      setState({
-        ...state,
-        role: result
-      });
-    }));
+    // return this.userService.getImage(uid).pipe(tap( result => {
+    //   setState({
+    //     ...state,
+    //     role: result
+    //   });
+    // }));
   }
 
 }

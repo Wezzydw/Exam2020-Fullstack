@@ -9,6 +9,7 @@ export class CertificateService {
 
   constructor(private firestore: AngularFirestore) { }
   certificateAdd(certificate: Certificate) {
-    return this.firestore.collection('/certificates').add(certificate);
+    debugger;
+    return this.firestore.collection('certificates').add(certificate);
   }
 }

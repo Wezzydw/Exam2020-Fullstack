@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {from, Observable} from 'rxjs';
+import {Observable} from 'rxjs';
 import {Certificate} from '../shared/certificate';
 import {Select, Store} from '@ngxs/store';
 import {CertificateReadAll} from '../shared/certificate.action';
 import {AuthState} from '../../auth/shared/auth.state';
 import {AuthUser} from '../../auth/shared/authUser';
 import {CertificateState} from '../shared/certificate.state';
-import {AngularFirestore, DocumentChangeAction} from '@angular/fire/firestore';
-import {map} from 'rxjs/operators';
+import {Navigate} from '@ngxs/router-plugin';
 
 @Component({
   selector: 'app-certificate-list',
@@ -23,8 +22,7 @@ export class CertificateListComponent implements OnInit {
 
   certificates: Certificate[];
   constructor(
-    private store: Store,
-    private af: AngularFirestore
+    private store: Store
   ) {  }
 
   ngOnInit() {
@@ -56,4 +54,7 @@ export class CertificateListComponent implements OnInit {
   // getAllCertificates() {
   //   this.certificates$ = this.store.dispatch(new CertificateReadAll());
   // }
+  goToDetails(cert: Certificate) {
+    this.store.dispatch(new Navigate([''])); // certificate detail
+  }
 }

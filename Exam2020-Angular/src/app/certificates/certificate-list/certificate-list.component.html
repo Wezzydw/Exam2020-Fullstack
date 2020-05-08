@@ -3,7 +3,7 @@
     <ul>
       <li *ngFor="let certificate of certificates">
         {{certificate.mName}} -- {{certificate.mUId}}
-        <img src="{{certificate.mPhoto}}}" alt="">
+        <img src="{{certificate.mPhoto}}}" alt="" (click)="goToDetails(certificate)">
       </li>
     </ul>
   </div>

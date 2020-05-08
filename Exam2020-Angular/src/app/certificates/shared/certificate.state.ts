@@ -41,6 +41,11 @@ export class CertificateState {
     return this.certService.certificateReadAll(action.userUid).pipe(
       first(),
       tap(x => {
+        x.forEach(y => {
+          this.certService.getImageForCertificate(y).then(value => {
+            y.mPhoto = value;
+          });
+        });
         ctx.setState({
           ...state,
           certificates: x

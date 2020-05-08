@@ -12,7 +12,7 @@ export class CertificateService {
 
   constructor(private af: AngularFirestore, private as: AngularFireStorage) { }
   certificateReadAll(userUid: string): Observable<Certificate[]> {
-    return this.af.collection<Certificate>('certificates', ref => ref.where('mUserUid', '==', 'SluEwNNVe6gjGmZD1Z3STvLelOa2'))
+    return this.af.collection<Certificate>('certificates', ref => ref.where('mUserUid', '==', userUid))
       .snapshotChanges().pipe(
         map(value => {
           return this.mapChangeAction(value);
@@ -25,9 +25,13 @@ export class CertificateService {
       const cert: Certificate = {
         mName: data.mName,
         mExpirationDate: data.mExpirationDate,
-        mUId: data.mUId
+        mUId: data.mUId,
+        mUserUid: data.mUserUid
       };
       return cert;
     });
+  }
+  getImageForCertificate(cert: Certificate): Promise<string> {
+    return this.as.ref('images/' + cert.mUserUid + '/certificates/' + cert.mUId).getDownloadURL().toPromise();
   }
 }

@@ -1,7 +1,8 @@
 export interface Certificate {
-  mUid?: string;
+
+  mUId?: string;
   mUserUid?: string;
   mName: string;
   mExpirationDate: string;
-  mPhoto: string;
+  mPhoto?: string;
 }

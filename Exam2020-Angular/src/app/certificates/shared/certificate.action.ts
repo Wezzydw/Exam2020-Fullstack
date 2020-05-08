@@ -1,3 +1,4 @@
+
 import {Certificate} from './certificate';
 
 export class CertificateAdd {
@@ -18,6 +19,10 @@ export class CertificateDelete {
   constructor(public certificateUid: string) {}
 }
 
+
 export class CertificateReadAll {
   static readonly type = '[Certificates] CertificateReadAll';
+
+  constructor(public userUid: string) {}
+
 }

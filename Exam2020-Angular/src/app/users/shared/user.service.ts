@@ -22,6 +22,7 @@ export class UserService {
       map(value => {
         const data = value.payload.data() as AuthUser;
         data.mUId = value.payload.id;
+        data.mCertificateList = value.payload.data().mCertificateList;
         return data;
       })
     );

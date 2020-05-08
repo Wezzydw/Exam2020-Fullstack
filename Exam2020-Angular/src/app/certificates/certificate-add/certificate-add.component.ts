@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {Certificate} from '../shared/certificate';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {Store} from '@ngxs/store';
+import {Select, Store} from '@ngxs/store';
 import {CertificateAdd} from '../shared/certificate.action';
+import {AuthState} from '../../auth/shared/auth.state';
+import {Observable} from 'rxjs';
+import {AuthUser} from '../../auth/shared/authUser';
 
 @Component({
   selector: 'app-certificate-add',
@@ -11,8 +14,10 @@ import {CertificateAdd} from '../shared/certificate.action';
 })
 export class CertificateAddComponent implements OnInit {
 private certificate: Certificate;
-
-
+image;
+  @Select(AuthState.loggedInUser)
+  loggedInUser$: Observable<AuthUser>;
+  userSub: AuthUser;
 
   certificateForm = new FormGroup({
     mName: new FormControl(''),
@@ -22,6 +27,9 @@ private certificate: Certificate;
   constructor(private store: Store) {}
 
   ngOnInit() {
+    this.loggedInUser$.subscribe(res => {
+      this.userSub = res;
+    });
   }
 
 
@@ -31,7 +39,11 @@ private certificate: Certificate;
     const mPhoto = this.certificateForm.get('mPhoto').value;
     const certificate: Certificate = {mName, mExpirationDate, mPhoto};
     console.log(certificate);
-    debugger;
-    this.store.dispatch(new CertificateAdd (certificate));
+    this.store.dispatch(new CertificateAdd (certificate, this.image, this.userSub.uid));
+  }
+
+  setImage(event) {
+    this.image = event.target.files[0];
+    console.log(this.image);
   }
 }

@@ -3,7 +3,7 @@ import {Certificate} from './certificate';
 export class CertificateAdd {
   static readonly type = '[Certificates] CertificateAdd';
 
-  constructor(public certificate: Certificate) {}
+  constructor(public certificate: Certificate, public image: File, public useruid: string) {}
 }
 
 export class CertificateEdit {

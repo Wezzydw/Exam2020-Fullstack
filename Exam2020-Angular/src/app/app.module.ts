@@ -13,6 +13,13 @@ import {AngularFireModule} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {NavbarComponent} from './shared/navbar/navbar.component';
+
+import {UserDetailComponent} from './users/user-detail/user-detail.component';
+import {CertificateDetailComponent} from './certificates/certificate-detail/certificate-detail.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatInputModule} from '@angular/material';
+import {CertificateState} from './certificates/shared/certificate.state';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatInputModule} from '@angular/material';
 import {UserState} from './users/shared/user.state';
@@ -32,6 +39,7 @@ import {CertificateState} from './certificates/shared/certificate.state';
   ],
   imports: [
     BrowserModule,
+
     NgxsModule.forRoot([
       UserState,
       AuthState,

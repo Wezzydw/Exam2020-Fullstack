@@ -5,6 +5,7 @@ import {CertificateAddComponent} from './certificate-add/certificate-add.compone
 import {CertificateListComponent} from './certificate-list/certificate-list.component';
 
 const routes: Routes = [
+
   { path: '', component: CertificateListComponent},
   { path: 'test', component: CertificateAddComponent}
 ];

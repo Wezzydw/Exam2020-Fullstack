@@ -1,4 +1,9 @@
 import { Injectable } from '@angular/core';
+
+import {AngularFirestore} from '@angular/fire/firestore';
+import {Certificate} from './certificate';
+import {AngularFireStorage} from '@angular/fire/storage';
+
 import {AngularFirestore, DocumentChangeAction} from '@angular/fire/firestore';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {from, Observable} from 'rxjs';
@@ -9,6 +14,17 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CertificateService {
+
+
+  constructor(private firestore: AngularFirestore, private as: AngularFireStorage) { }
+  certificateAdd(certificate: Certificate) {
+    return this.firestore.collection('certificates').add(certificate);
+  }
+  certificateImageUpload(path: string, image: File) {
+    return this.as.ref(path).put(image).then( a => {
+      return a;
+    });
+  }
 
   constructor(private af: AngularFirestore, private as: AngularFireStorage) { }
   certificateReadAll(userUid: string): Observable<Certificate[]> {

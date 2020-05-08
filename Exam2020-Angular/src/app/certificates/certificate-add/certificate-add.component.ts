@@ -39,7 +39,7 @@ image;
     const mPhoto = this.certificateForm.get('mPhoto').value;
     const certificate: Certificate = {mName, mExpirationDate, mPhoto};
     console.log(certificate);
-    this.store.dispatch(new CertificateAdd (certificate, this.image, this.userSub.uid));
+    this.store.dispatch(new CertificateAdd (certificate, this.image, this.userSub.mUId));
   }
 
   setImage(event) {

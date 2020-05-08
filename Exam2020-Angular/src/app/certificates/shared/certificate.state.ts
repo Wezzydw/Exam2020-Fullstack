@@ -2,8 +2,6 @@ import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 
 import {CertificateAdd} from './certificate.action';
-import {CertificateService} from './certificate.service';
-import {Certificate} from './certificate';
 import {AuthState, AuthStateModel} from '../../auth/shared/auth.state';
 
 import {CertificateService} from './certificate.service';
@@ -30,8 +28,8 @@ export class CertificateState {
 
 
   @Selector()
-  static certificate(state: CertificateStateModel){
-    return state.certificate;
+  static certificates(state: CertificateStateModel) {
+    return state.certificates;
   }
 
   @Action(CertificateAdd)
@@ -44,14 +42,11 @@ export class CertificateState {
       });
       ctx.setState({
         ...state,
-        certificate: [...state.certificate, certificate]
+        certificates: [...state.certificates, certificate]
       });
     });
-
-  @Selector()
-  static certificates(state: CertificateStateModel) {
-    return state.certificates;
   }
+
 
   // @Action(CertificateAdd)
   // certificateAdd(ctx: StateContext<CertificateStateModel>, action: CertificateAdd) {

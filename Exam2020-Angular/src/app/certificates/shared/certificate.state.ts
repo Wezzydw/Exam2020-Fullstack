@@ -5,16 +5,19 @@ import {Certificate} from './certificate';
 import {AuthUser} from '../../auth/shared/authUser';
 import {AuthService} from '../../auth/shared/auth.service';
 import {UserService} from '../../users/shared/user.service';
-import {CertificateReadAll} from './certificate.action';
+import {CertificateReadAll, SetSelectedCertificate} from './certificate.action';
 import {first, tap} from 'rxjs/operators';
+import {Navigate} from '@ngxs/router-plugin';
 
 export class CertificateStateModel {
   certificates: Certificate[];
+  selectedCertificate: Certificate;
 }
 @State<CertificateStateModel>({
   name: 'certificate',
   defaults: {
-    certificates: []
+    certificates: [],
+    selectedCertificate: undefined
   }
 })
 @Injectable()
@@ -23,6 +26,10 @@ export class CertificateState {
   @Selector()
   static certificates(state: CertificateStateModel) {
     return state.certificates;
+  }
+  @Selector()
+  static selectedCertificate(state: CertificateStateModel) {
+    return state.selectedCertificate;
   }
 
   // @Action(CertificateAdd)
@@ -52,5 +59,15 @@ export class CertificateState {
         });
       })
     );
+  }
+
+  @Action(SetSelectedCertificate)
+  setSelectedCertificate(ctx: StateContext<CertificateStateModel>, action: SetSelectedCertificate) {
+    const state = ctx.getState();
+    ctx.setState({
+      ...state,
+      selectedCertificate: action.certificate
+    });
+    ctx.dispatch(new Navigate(['cert/detail']));
   }
 }

@@ -6,7 +6,8 @@ import {CertificateListComponent} from './certificate-list/certificate-list.comp
 
 const routes: Routes = [
   { path: '', component: CertificateListComponent},
-  { path: 'test', component: CertificateAddComponent}
+  { path: 'test', component: CertificateAddComponent},
+  { path: 'detail', component: CertificateDetailComponent}
 ];
 
 @NgModule({

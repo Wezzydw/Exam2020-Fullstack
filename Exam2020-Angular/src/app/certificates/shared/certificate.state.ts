@@ -6,7 +6,7 @@ import {AuthUser} from '../../auth/shared/authUser';
 import {AuthService} from '../../auth/shared/auth.service';
 import {UserService} from '../../users/shared/user.service';
 import {CertificateReadAll} from './certificate.action';
-import {tap} from 'rxjs/operators';
+import {first, tap} from 'rxjs/operators';
 
 export class CertificateStateModel {
   certificates: Certificate[];
@@ -38,11 +38,14 @@ export class CertificateState {
   @Action(CertificateReadAll)
   certificateReadAll(ctx: StateContext<CertificateStateModel>, action: CertificateReadAll) {
     const state = ctx.getState();
-    return this.certService.certificateReadAll(action.userUid).then(value => {
-      ctx.setState({
-        ...state,
-        certificates: value
-      });
-    });
+    return this.certService.certificateReadAll(action.userUid).pipe(
+      first(),
+      tap(x => {
+        ctx.setState({
+          ...state,
+          certificates: x
+        });
+      })
+    );
   }
 }

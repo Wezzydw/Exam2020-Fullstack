@@ -21,7 +21,7 @@ export class CertificateListComponent implements OnInit {
   certificates$: Observable<Certificate[]>;
   userSub: AuthUser;
 
-  certificates: Observable<Certificate[]>;
+  certificates: Certificate[];
   constructor(
     private store: Store,
     private af: AngularFirestore
@@ -31,7 +31,10 @@ export class CertificateListComponent implements OnInit {
     this.loggedInUser$.subscribe(res => {
       this.userSub = res;
     });
-    // this.store.dispatch(new CertificateReadAll(this.userSub.mUId));
+    this.store.dispatch(new CertificateReadAll(this.userSub.mUId));
+    this.certificates$.subscribe(res => {
+      this.certificates = res;
+    });
     // this.certificates$.subscribe( result => {
     //   this.certificates = result;
     // });
@@ -48,27 +51,9 @@ export class CertificateListComponent implements OnInit {
     //   });
     //   return allCert;
     // }));
-
-    this.certificates = this.af.collection<Certificate>('certificates', ref => ref.where('mUserUid', '==', 'SluEwNNVe6gjGmZD1Z3STvLelOa2'))
-      .snapshotChanges().pipe(
-      map(value => {
-        return this.mapChangeAction(value);
-      })
-    );
   }
 
   // getAllCertificates() {
   //   this.certificates$ = this.store.dispatch(new CertificateReadAll());
   // }
-  private mapChangeAction(value: DocumentChangeAction<Certificate>[]): Certificate[] {
-    return value.map(docAction => {
-      const data = docAction.payload.doc.data();
-      const cert: Certificate = {
-        mName: data.mName,
-        mExpirationDate: data.mExpirationDate,
-        mUId: data.mUId
-      };
-      return cert;
-    });
-  }
 }

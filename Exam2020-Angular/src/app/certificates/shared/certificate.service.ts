@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import {AngularFirestore} from '@angular/fire/firestore';
+import {AngularFirestore, DocumentChangeAction} from '@angular/fire/firestore';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {from, Observable} from 'rxjs';
 import {Certificate} from './certificate';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,15 +11,23 @@ import {Certificate} from './certificate';
 export class CertificateService {
 
   constructor(private af: AngularFirestore, private as: AngularFireStorage) { }
-  certificateReadAll(userUid: string): Promise<Certificate[]> {
-    return this.af.firestore.collection('certificates').where('userUid', '==', userUid).get().then(value => {
-      // const allCert: Certificate[] = [{mUid: 'see', mExpirationDate: 'see', mName: '22'}];
-      const allCert: Certificate[] = [];
-      value.forEach(result => {
-        const cert = result.data() as Certificate;
-        allCert.push(cert);
-      });
-      return allCert;
+  certificateReadAll(userUid: string): Observable<Certificate[]> {
+    return this.af.collection<Certificate>('certificates', ref => ref.where('mUserUid', '==', 'SluEwNNVe6gjGmZD1Z3STvLelOa2'))
+      .snapshotChanges().pipe(
+        map(value => {
+          return this.mapChangeAction(value);
+        })
+      );
+  }
+  private mapChangeAction(value: DocumentChangeAction<Certificate>[]): Certificate[] {
+    return value.map(docAction => {
+      const data = docAction.payload.doc.data();
+      const cert: Certificate = {
+        mName: data.mName,
+        mExpirationDate: data.mExpirationDate,
+        mUId: data.mUId
+      };
+      return cert;
     });
   }
 }

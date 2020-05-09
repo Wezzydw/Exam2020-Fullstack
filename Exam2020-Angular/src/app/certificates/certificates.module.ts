@@ -4,15 +4,24 @@ import { CertificateListComponent } from './certificate-list/certificate-list.co
 import { CertificateAddComponent } from './certificate-add/certificate-add.component';
 import { CertificateDetailComponent } from './certificate-detail/certificate-detail.component';
 import {CertificatesRoutingModule} from './certificates-routing.module';
-import {MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+import {MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatListModule} from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 
 
 @NgModule({
   declarations: [CertificateListComponent, CertificateAddComponent, CertificateDetailComponent],
   imports: [
-    CommonModule, CertificatesRoutingModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatCardModule, MatButtonModule
+    CommonModule,
+    CertificatesRoutingModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatButtonModule,
+    MatListModule,
+    FlexLayoutModule
   ]
 })
 export class CertificatesModule { }

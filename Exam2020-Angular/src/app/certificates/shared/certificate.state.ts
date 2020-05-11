@@ -76,14 +76,19 @@ export class CertificateState {
     const state = ctx.getState();
     const cert = ctx.getState().certificates;
     let temp = -1;
-
-    cert.forEach((value, index) => { if ( value.mUId === action.certificate.mUId) {
-      temp = index;
-    }});
-    cert[temp] = action.certificate;
-    ctx.patchState({
-      certificates: cert
+    this.certService.certificateImageUpload('images/' + action.certificate.mUserUid + '/certificates/' + action.certificate.mUId, action.image).then(() => {
+      this.certService.getImageForCertificate(action.certificate).then(value1 => {
+        action.certificate.mPhoto = value1;
+        this.certService.updateCertificate(action.certificate).then(() => {
+          cert.forEach((value, index) => { if ( value.mUId === action.certificate.mUId) {
+            temp = index;
+          }});
+          cert[temp] = action.certificate;
+          ctx.patchState({
+            certificates: cert
+          });
+        });
+      });
     });
-
   }
 }

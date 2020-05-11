@@ -9,6 +9,11 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CertificateService {
+  certificateImageUpload(path: string, image: File) {
+    return this.as.ref(path).put(image).then( a => {
+      return a;
+    });
+  }
 
   constructor(private af: AngularFirestore, private as: AngularFireStorage) { }
   certificateReadAll(userUid: string): Observable<Certificate[]> {

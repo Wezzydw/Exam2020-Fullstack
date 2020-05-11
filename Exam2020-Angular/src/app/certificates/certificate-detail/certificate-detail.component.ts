@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
 import {CertificateState} from '../shared/certificate.state';
 import {Certificate} from '../shared/certificate';
 import {FormControl} from '@angular/forms';
+import {UpdateCertificate} from '../shared/certificate.action';
 
 @Component({
   selector: 'app-certificate-detail',
@@ -37,8 +38,7 @@ SelectedCertificate$: Observable<Certificate>;
       this.certificate = value;
     });
   }
-
   editCertificate() {
-    this.store.dispatch(this.);
+    this.store.dispatch(new UpdateCertificate(this.certificate));
   }
 }

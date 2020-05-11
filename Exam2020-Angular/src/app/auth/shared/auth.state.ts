@@ -64,28 +64,28 @@ export class AuthState {
   }
 
   @Action(UpdateUser)
-  update(ctx: StateContext<AuthStateModel>, {payload, image}: UpdateUser) {
+  async update(ctx: StateContext<AuthStateModel>, {payload, image}: UpdateUser) {
     if (image != null) {
       console.log('ImagenotNull');
-      this.userService.uploadImage(image, payload.mUId).then( a => {
+      await this.userService.uploadImage(image, payload.mUId).then( a => {
         console.log('waiting', a);
-        this.userService.updateUser(payload);
-        const user = AuthState.loggedInUser(ctx.getState());
         console.log('before getimage');
         return this.userService.getImage(payload.mUId).then(result => {
           console.log('before ctx')
           payload.mImageUrl = result;
-          ctx.setState({
-            ...ctx.getState(),
-            loggedInUser: payload
-          });
+          this.userService.updateUser(payload);
         });
+      });
+      ctx.setState({
+        ...ctx.getState(),
+        loggedInUser: payload
       });
 
     } else {
       this.userService.updateUser(payload);
       const user = AuthState.loggedInUser(ctx.getState());
       console.log('before getimage');
+
       return this.userService.getImage(payload.mUId).then(result => {
         console.log('before ctx')
         payload.mImageUrl = result;

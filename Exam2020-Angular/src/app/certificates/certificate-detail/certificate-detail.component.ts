@@ -5,6 +5,7 @@ import {AuthState} from '../../auth/shared/auth.state';
 import {Observable} from 'rxjs';
 import {CertificateState} from '../shared/certificate.state';
 import {Certificate} from '../shared/certificate';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-certificate-detail',
@@ -20,7 +21,13 @@ private toUpdate = false;
 LoggedInUser$: Observable<AuthUser>;
 @Select(CertificateState.selectedCertificate)
 SelectedCertificate$: Observable<Certificate>;
+ updateForm = new FormControl({
+   mPhoto: new FormControl('mPhoto'),
+   mName: new FormControl('mName'),
+   mExpirationDate: new FormControl('mExpirationDate')
+ });
   constructor(private store: Store) { }
+
 
   ngOnInit() {
     this.LoggedInUser$.subscribe(value => {

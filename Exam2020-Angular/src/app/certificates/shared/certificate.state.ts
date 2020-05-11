@@ -5,7 +5,7 @@ import {Certificate} from './certificate';
 import {AuthUser} from '../../auth/shared/authUser';
 import {AuthService} from '../../auth/shared/auth.service';
 import {UserService} from '../../users/shared/user.service';
-import {CertificateReadAll, SetSelectedCertificate} from './certificate.action';
+import {CertificateReadAll, SetSelectedCertificate, UpdateCertificate} from './certificate.action';
 import {first, tap} from 'rxjs/operators';
 import {Navigate} from '@ngxs/router-plugin';
 
@@ -31,6 +31,7 @@ export class CertificateState {
   static selectedCertificate(state: CertificateStateModel) {
     return state.selectedCertificate;
   }
+
 
   // @Action(CertificateAdd)
   // certificateAdd(ctx: StateContext<CertificateStateModel>, action: CertificateAdd) {
@@ -69,5 +70,20 @@ export class CertificateState {
       selectedCertificate: action.certificate
     });
     ctx.dispatch(new Navigate(['cert/detail']));
+  }
+  @Action(UpdateCertificate)
+  updateCertificate(ctx: StateContext<CertificateStateModel>, action: UpdateCertificate) {
+    const state = ctx.getState();
+    const cert = ctx.getState().certificates;
+    let temp = -1;
+
+    cert.forEach((value, index) => { if ( value.mUId === action.certificate.mUId) {
+      temp = index;
+    }});
+    cert[temp] = action.certificate;
+    ctx.patchState({
+      certificates: cert
+    });
+
   }
 }

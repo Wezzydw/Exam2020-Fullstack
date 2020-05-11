@@ -34,4 +34,9 @@ export class CertificateService {
   getImageForCertificate(cert: Certificate): Promise<string> {
     return this.as.ref('images/' + cert.mUserUid + '/certificates/' + cert.mUId).getDownloadURL().toPromise();
   }
+  updateCertificate(cert: Certificate): Promise<Certificate> {
+    return this.af.doc('certificates/' + cert.mUId).update(cert).then(value => {
+      return cert;
+    });
+  }
 }

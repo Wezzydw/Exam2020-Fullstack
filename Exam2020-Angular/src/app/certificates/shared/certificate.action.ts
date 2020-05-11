@@ -12,3 +12,9 @@ export class SetSelectedCertificate {
 
   constructor(public certificate: Certificate) {}
 }
+
+export class UpdateCertificate {
+  static readonly type = '[Certificates] UpdateCertificate';
+
+  constructor(public certificate: Certificate) {}
+}

@@ -13,10 +13,9 @@
 <ng-template #edit>
   <div>
   <form [formGroup]="updateForm">
-    <label>
-      Photo Path:
-      <input type="text" formControlName="mPhoto">
-    </label>
+    <img id="blah" alt="your image" width="100" height="100" />
+      <input type="file"
+             onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])" (change)="setImage($event)">
     <label>
       Certificate Name:
       <input type="text" formControlName="mName">

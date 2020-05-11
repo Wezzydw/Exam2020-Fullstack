@@ -11,6 +11,7 @@ import {AuthService} from '../../auth/shared/auth.service';
 import {UserService} from '../../users/shared/user.service';
 import {CertificateReadAll} from './certificate.action';
 import {first, tap} from 'rxjs/operators';
+import {merge} from 'rxjs';
 
 export class CertificateStateModel {
   certificates: Certificate[];
@@ -35,14 +36,25 @@ export class CertificateState {
   @Action(CertificateAdd)
   certificateAdd(ctx: StateContext<CertificateStateModel>, {certificate, image, useruid}: CertificateAdd) {
     const state = ctx.getState();
+
     return this.certService.certificateAdd(certificate).then(value => {
-      console.log('value', value.id);
-      this.certService.certificateImageUpload('images/' + useruid + '/certificates/' + value.id, image).then(r => {
-        console.log(r);
+      value.set({mUId: value.id}, {merge: true}).then(() => {
+        console.log('id has been set');
       });
-      ctx.setState({
-        ...state,
-        certificates: [...state.certificates, certificate]
+      console.log('value', value.id);
+      certificate.mUId = value.id;
+      console.log('mUID FOR CERT', certificate.mUId);
+      this.certService.certificateImageUpload('images/' + certificate.mUserUid + '/certificates/' + certificate.mUId, image).then(r => {
+        console.log('return ', r);
+        this.certService.getImageForCertificate(certificate).then(result => {
+          certificate.mPhoto = result;
+          certificate.mExpirationDate = 'testerLigeStateHer';
+          console.log('ctx', certificate);
+          ctx.setState({
+            ...state,
+            certificates: [...state.certificates, certificate]
+          });
+        });
       });
     });
   }

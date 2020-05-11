@@ -12,6 +12,15 @@ service cloud.firestore {
     // your app will lose access to your Firestore database
     match /{document=**} {
       allow read, write: if request.time < timestamp.date(2020, 5, 22);
+      allow write, create, update, delete: if get(/databases/$(database)/documents/users/$(request.auth.uid)).data.administrator == true;
+    }
+    match /users/{userId} {
+      allow create: if true;
+      allow read, update, delete if request.auth.uid != userId;
+    }
+    match /certificates/{certId} {
+      allow create: if request.auth.uid != null;
+      allow read, update, delete: if get(/databases/$(database)/documents/certificates/{certId}.data.mUserUid == request.auth.uid;
     }
   }
 }

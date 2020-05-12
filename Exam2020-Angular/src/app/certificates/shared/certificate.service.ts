@@ -21,11 +21,6 @@ export class CertificateService {
   certificateAdd(certificate: Certificate) {
     return this.af.collection('certificates').add(certificate);
   }
-  certificateImageUpload(path: string, image: File) {
-    return this.as.ref(path).put(image).then( a => {
-      return a;
-    });
-  }
 
 
   certificateReadAll(userUid: string): Observable<Certificate[]> {

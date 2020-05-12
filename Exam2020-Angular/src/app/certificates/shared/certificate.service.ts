@@ -11,6 +11,11 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CertificateService {
+  certificateImageUpload(path: string, image: File) {
+    return this.as.ref(path).put(image).then( a => {
+      return a;
+    });
+  }
 
   constructor(private af: AngularFirestore, private as: AngularFireStorage) { }
   certificateAdd(certificate: Certificate) {
@@ -45,5 +50,10 @@ export class CertificateService {
   }
   getImageForCertificate(cert: Certificate): Promise<string> {
     return this.as.ref('images/' + cert.mUserUid + '/certificates/' + cert.mUId).getDownloadURL().toPromise();
+  }
+  updateCertificate(cert: Certificate): Promise<Certificate> {
+    return this.af.doc('certificates/' + cert.mUId).update(cert).then(value => {
+      return cert;
+    });
   }
 }

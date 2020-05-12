@@ -9,17 +9,20 @@ import {Certificate} from './certificate';
 import {AuthUser} from '../../auth/shared/authUser';
 import {AuthService} from '../../auth/shared/auth.service';
 import {UserService} from '../../users/shared/user.service';
-import {CertificateReadAll} from './certificate.action';
+import {CertificateReadAll, SetSelectedCertificate, UpdateCertificate} from './certificate.action';
 import {first, tap} from 'rxjs/operators';
+import {Navigate} from '@ngxs/router-plugin';
 import {merge} from 'rxjs';
 
 export class CertificateStateModel {
   certificates: Certificate[];
+  selectedCertificate: Certificate;
 }
 @State<CertificateStateModel>({
   name: 'certificate',
   defaults: {
-    certificates: []
+    certificates: [],
+    selectedCertificate: undefined
   }
 
 })
@@ -32,6 +35,11 @@ export class CertificateState {
   static certificates(state: CertificateStateModel) {
     return state.certificates;
   }
+  @Selector()
+  static selectedCertificate(state: CertificateStateModel) {
+    return state.selectedCertificate;
+  }
+
 
   @Action(CertificateAdd)
   certificateAdd(ctx: StateContext<CertificateStateModel>, {certificate, image, useruid}: CertificateAdd) {
@@ -87,5 +95,35 @@ export class CertificateState {
         });
       })
     );
+  }
+
+  @Action(SetSelectedCertificate)
+  setSelectedCertificate(ctx: StateContext<CertificateStateModel>, action: SetSelectedCertificate) {
+    const state = ctx.getState();
+    ctx.setState({
+      ...state,
+      selectedCertificate: action.certificate
+    });
+    ctx.dispatch(new Navigate(['cert/detail']));
+  }
+  @Action(UpdateCertificate)
+  updateCertificate(ctx: StateContext<CertificateStateModel>, action: UpdateCertificate) {
+    const state = ctx.getState();
+    const cert = ctx.getState().certificates;
+    let temp = -1;
+    this.certService.certificateImageUpload('images/' + action.certificate.mUserUid + '/certificates/' + action.certificate.mUId, action.image).then(() => {
+      this.certService.getImageForCertificate(action.certificate).then(value1 => {
+        action.certificate.mPhoto = value1;
+        this.certService.updateCertificate(action.certificate).then(() => {
+          cert.forEach((value, index) => { if ( value.mUId === action.certificate.mUId) {
+            temp = index;
+          }});
+          cert[temp] = action.certificate;
+          ctx.patchState({
+            certificates: cert
+          });
+        });
+      });
+    });
   }
 }

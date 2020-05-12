@@ -1,1 +1,44 @@
-<p>certificate-detail works!</p>
+<div *ngIf="toUpdate; then edit else view"></div>
+
+<mat-slide-toggle (change)="toUpdate=!toUpdate">update</mat-slide-toggle>
+
+<ng-template #view>
+  <mat-card>
+    <img mat-card-image src="{{certificate.mPhoto}}">
+    <mat-label>{{certificate.mName}}</mat-label>
+    <mat-label>{{certificate.mExpirationDate}}</mat-label>
+  </mat-card>
+</ng-template>
+
+<ng-template #edit>
+  <div>
+  <form [formGroup]="updateForm">
+    <img id="blah" alt="your image" width="100" height="100" />
+      <input type="file"
+             onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])" (change)="setImage($event)">
+    <label>
+      Certificate Name:
+      <input type="text" formControlName="mName">
+    </label>
+    <label>
+      Expiration Date:
+      <input type="text" formControlName="mExpirationDate">
+    </label>
+    <button (click)="editCertificate()">Submit Changes</button>
+  </form>
+  </div>
+</ng-template>
+
+
+
+<!--<ng-template #guest>-->
+<!-- mExpirationDate -->
+
+<!--</ng-template>-->
+
+<!--<ng-template #authenticated>-->
+<!--  <div *ngIf="loggedInUser$ | async as user">-->
+<!--    <h1>You are logged in as {{user.mEmail}}</h1>-->
+<!--    <button (click)="logOut()">Log out</button>-->
+<!--  </div>-->
+<!--</ng-template>-->

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import {Certificate} from '../shared/certificate';
 import {Select, Store} from '@ngxs/store';
-import {CertificateReadAll} from '../shared/certificate.action';
+import {CertificateReadAll, SetSelectedCertificate} from '../shared/certificate.action';
 import {AuthState} from '../../auth/shared/auth.state';
 import {AuthUser} from '../../auth/shared/authUser';
 import {CertificateState} from '../shared/certificate.state';
@@ -55,6 +55,6 @@ export class CertificateListComponent implements OnInit {
   //   this.certificates$ = this.store.dispatch(new CertificateReadAll());
   // }
   goToDetails(cert: Certificate) {
-    this.store.dispatch(new Navigate([''])); // certificate detail
+    this.store.dispatch(new SetSelectedCertificate(cert)); // certificate detail
   }
 }

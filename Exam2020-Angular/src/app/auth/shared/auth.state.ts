@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {AuthService} from './auth.service';
 
-import {GetImage, GetUser, LoginEmail, UpdateUser, LogOut, RegisterUser} from './auth.action';
+import {GetImage, GetUser, LoginEmail, UpdateUser, LogOut, RegisterUser, DeleteUser} from './auth.action';
 import {tap} from 'rxjs/operators';
 import {UserService} from '../../users/shared/user.service';
 import {Navigate} from '@ngxs/router-plugin';
@@ -140,4 +140,10 @@ export class AuthState {
       );
   }
 
+  @Action(DeleteUser)
+  deleteUser(ctx: StateContext<AuthStateModel>, {uid}: DeleteUser) {
+    const state = ctx.getState();
+    this.authService.deleteUser();
+
+  }
 }

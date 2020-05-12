@@ -5,7 +5,7 @@ import {Select, Store} from '@ngxs/store';
 import {GetUser, } from '../shared/user.actions';
 import {UserState} from '../shared/user.state';
 import {Observable} from 'rxjs';
-import {GetImage, LoginEmail, UpdateUser} from '../../auth/shared/auth.action';
+import {DeleteUser, GetImage, LoginEmail, LogOut, UpdateUser} from '../../auth/shared/auth.action';
 import {AuthUser} from '../../auth/shared/authUser';
 import {AuthState} from '../../auth/shared/auth.state';
 
@@ -94,5 +94,9 @@ export class UserDetailComponent implements OnInit {
 
   getProfilePic(uid: string) {
     this.store.dispatch(new GetImage(uid));
+  }
+  deleteUser() {
+    this.store.dispatch(new DeleteUser(this.userSub.mUId));
+    this.store.dispatch(new LogOut());
   }
 }

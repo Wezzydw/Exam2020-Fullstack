@@ -58,4 +58,9 @@ export class AuthService {
       };
     }
   }
+  deleteUser() {
+    this.afAuth.auth.currentUser.delete().then(r => {
+      console.log('Delete succesfull', r);
+    });
+  }
 }

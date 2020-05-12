@@ -1,5 +1,9 @@
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
+
+import {CertificateAdd} from './certificate.action';
+import {AuthState, AuthStateModel} from '../../auth/shared/auth.state';
+
 import {CertificateService} from './certificate.service';
 import {Certificate} from './certificate';
 import {AuthUser} from '../../auth/shared/authUser';
@@ -8,6 +12,7 @@ import {UserService} from '../../users/shared/user.service';
 import {CertificateReadAll, SetSelectedCertificate, UpdateCertificate} from './certificate.action';
 import {first, tap} from 'rxjs/operators';
 import {Navigate} from '@ngxs/router-plugin';
+import {merge} from 'rxjs';
 
 export class CertificateStateModel {
   certificates: Certificate[];
@@ -19,10 +24,13 @@ export class CertificateStateModel {
     certificates: [],
     selectedCertificate: undefined
   }
+
 })
 @Injectable()
 export class CertificateState {
   constructor(private certService: CertificateService) { }
+
+
   @Selector()
   static certificates(state: CertificateStateModel) {
     return state.certificates;
@@ -30,6 +38,33 @@ export class CertificateState {
   @Selector()
   static selectedCertificate(state: CertificateStateModel) {
     return state.selectedCertificate;
+  }
+
+
+  @Action(CertificateAdd)
+  certificateAdd(ctx: StateContext<CertificateStateModel>, {certificate, image, useruid}: CertificateAdd) {
+    const state = ctx.getState();
+
+    return this.certService.certificateAdd(certificate).then(value => {
+      value.set({mUId: value.id}, {merge: true}).then(() => {
+        console.log('id has been set');
+      });
+      console.log('value', value.id);
+      certificate.mUId = value.id;
+      console.log('mUID FOR CERT', certificate.mUId);
+      this.certService.certificateImageUpload('images/' + certificate.mUserUid + '/certificates/' + certificate.mUId, image).then(r => {
+        console.log('return ', r);
+        this.certService.getImageForCertificate(certificate).then(result => {
+          certificate.mPhoto = result;
+          certificate.mExpirationDate = 'testerLigeStateHer';
+          console.log('ctx', certificate);
+          ctx.setState({
+            ...state,
+            certificates: [...state.certificates, certificate]
+          });
+        });
+      });
+    });
   }
 
 

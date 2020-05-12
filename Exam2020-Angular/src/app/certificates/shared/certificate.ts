@@ -1,4 +1,5 @@
 export interface Certificate {
+
   mUId?: string;
   mUserUid?: string;
   mName: string;

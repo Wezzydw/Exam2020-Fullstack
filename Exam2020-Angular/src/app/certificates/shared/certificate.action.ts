@@ -39,3 +39,21 @@ export class UpdateCertificate {
 
   constructor(public certificate: Certificate, public image: File) {}
 }
+
+export class NextPage {
+static readonly type = '[Certificates] NextPage';
+
+constructor() {}
+}
+
+export class PreviousPage {
+  static readonly type = '[Certificates] PreviousPage';
+
+  constructor() {}
+}
+
+export class LoadPage {
+  static readonly type = '[Certificates] LoadPage';
+
+  constructor() {}
+}

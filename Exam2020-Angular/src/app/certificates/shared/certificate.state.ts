@@ -1,7 +1,7 @@
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 
-import {CertificateAdd} from './certificate.action';
+import {CertificateAdd, LoadPage, NextPage, PreviousPage} from './certificate.action';
 import {AuthState, AuthStateModel} from '../../auth/shared/auth.state';
 
 import {CertificateService} from './certificate.service';
@@ -126,4 +126,19 @@ export class CertificateState {
       });
     });
   }
+
+  // @Action(LoadPage)
+  // loadPage(ctx: StateContext<CertificateStateModel>) {
+  //   return this.certService.loadItems();
+  // }
+  //
+  // @Action(NextPage)
+  // nextPage(ctx: StateContext<CertificateStateModel>) {
+  //   return this.certService.nextPage();
+  // }
+  //
+  // @Action(PreviousPage)
+  // previousPage(ctx: StateContext<CertificateStateModel>) {
+  //   return this.certService.prevPage();
+  // }
 }

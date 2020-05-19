@@ -1,33 +1,36 @@
-<div class="main-component" fxLayout="column" fxLayoutGap="2em">
-  <div [fxFlexOrder]="1">
-    <h1>welcome to certificate list</h1>
-    <h2>username</h2>
-  </div>
-  <div [fxFlexOrder]="2">
-    <div fxLayout="row wrap" fxLayoutGap="4em grid">
-      <div fxFlex="33"  *ngFor="let certificate of certificates">
-        <mat-card (click)="goToDetails(certificate)">
-          <img mat-card-image width="300" height="200" src="{{certificate.mPhoto}}" alt="">
-          <mat-card-content>
-            <mat-list>
-              <h3>{{certificate.mName}}</h3>
-              <h3>{{certificate.mExpirationDate}}</h3>
-            </mat-list>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
+<!--<div class="main-component" fxLayout="column" fxLayoutGap="2em">-->
+<!--  <div [fxFlexOrder]="1">-->
+<!--    <h1>welcome to certificate list</h1>-->
+<!--    <h2>username</h2>-->
+<!--  </div>-->
+<!--  <div [fxFlexOrder]="2">-->
+<!--    <div fxLayout="row wrap" fxLayoutGap="4em grid">-->
+<!--      <div fxFlex="33"  *ngFor="let certificate of certificates">-->
+<!--        <mat-card (click)="goToDetails(certificate)">-->
+<!--          <img mat-card-image width="300" height="200" src="{{certificate.mPhoto}}" alt="">-->
+<!--          <mat-card-content>-->
+<!--            <mat-list>-->
+<!--              <h3>{{certificate.mName}}</h3>-->
+<!--              <h3>{{certificate.mExpirationDate}}</h3>-->
+<!--            </mat-list>-->
+<!--          </mat-card-content>-->
+<!--        </mat-card>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
 
 <div>
-  <ul>
-    <li *ngFor="let certificate of certificates">
-      {{certificate.mName}} -- {{certificate.mUId}}
-      <img src="{{certificate.mPhoto}}}" alt="" (click)="goToDetails(certificate)">
-    </li>
-  </ul>
+  <div class="text-center">
+    <button class="btn btn btn-info btn-sm float-left" (click)="prevPage()"
+            [disabled]="disablePrev || !(paginationClickedCount>0)">Previous</button> <b>Page no: {{paginationClickedCount+1}}</b>
+    <button class="btn btn btn-info btn-sm float-right" (click)="nextPage()" [disabled]="disableNext">Next</button>
+  </div>
+  <table class="table">
+    <tbody>
+    <tr *ngFor="let item of tableData">
+      <td>{{item.mName}}</td>
+    </tr>
+    </tbody>
+  </table>
 </div>

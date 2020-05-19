@@ -1,0 +1,21 @@
+<div class="main-component" fxLayout="column" fxLayoutGap="2em">
+  <div [fxFlexOrder]="1">
+    <h1>welcome to certificate list</h1>
+    <h2>username</h2>
+  </div>
+  <div [fxFlexOrder]="2">
+    <div fxLayout="row wrap" fxLayoutGap="4em grid">
+      <div fxFlex="33"  *ngFor="let user of users">
+        <mat-card (click)="goToDetails(user)">
+          <img mat-card-image width="300" height="200" src="{{user.mImageUrl}}" alt="">
+          <mat-card-content>
+            <mat-list>
+              <h3>{{user.mName}}</h3>
+              <h3>{{user.mEmail}}</h3>
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

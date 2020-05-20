@@ -39,7 +39,7 @@ export class UsersViewComponent implements OnInit {
 
   loadItems() {
     this.af.collection('users', ref => ref
-      .limit(2)
+      .limit(1)
       .orderBy('mName', 'desc')
     ).snapshotChanges()
       .subscribe(response => {
@@ -72,7 +72,7 @@ export class UsersViewComponent implements OnInit {
       .orderBy('mName', 'desc')
       .startAt(this.getPrevStartAt())
       .endBefore(this.firstInResponse)
-      .limit(2)
+      .limit(1)
     ).get()
       .subscribe(response => {
         this.firstInResponse = response.docs[0];
@@ -97,7 +97,7 @@ export class UsersViewComponent implements OnInit {
   nextPage() {
     this.disableNext = true;
     this.af.collection('users', ref => ref
-      .limit(2)
+      .limit(1)
       .orderBy('mName', 'desc')
       .startAfter(this.lastInResponse)
     ).get()

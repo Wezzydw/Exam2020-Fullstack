@@ -24,7 +24,6 @@ export class AdminUserDetailComponent implements OnInit {
   image: File;
   userSettings;
   userForm;
-  private cert: Certificate;
   certificates: Certificate[];
   @Select(CertificateState.certificates)
   certificates$: Observable<Certificate[]>;
@@ -106,8 +105,8 @@ export class AdminUserDetailComponent implements OnInit {
     this.store.dispatch(new GetImage(uid));
   }
   deleteUser() {
+    debugger;
     this.store.dispatch(new DeleteUser(this.userSub.mUId));
-    this.store.dispatch(new LogOut());
   }
 
   goToCertificateDetails(certificate: Certificate) {

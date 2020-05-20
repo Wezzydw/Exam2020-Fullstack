@@ -1,6 +1,7 @@
-export class CertificateReadAll {
-  static readonly type = '[Admins] UsersReadAll';
+import {AuthUser} from '../../auth/shared/authUser';
 
-  constructor(public userUid: string) {}
+export class SetSelectedUser {
+  static readonly type = '[Admin] SetSelectedUser';
 
+  constructor(public user: AuthUser) {}
 }

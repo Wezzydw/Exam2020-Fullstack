@@ -26,6 +26,7 @@ import {AuthState} from './auth/shared/auth.state';
 import { PopuppasswordComponent } from './shared/popuppassword/popuppassword.component';
 import { MatDialogModule} from '@angular/material';
 import {CertificateState} from './certificates/shared/certificate.state';
+import {AdminState} from './admins/shared/admin.state';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import {CertificateState} from './certificates/shared/certificate.state';
     NgxsModule.forRoot([
       UserState,
       AuthState,
-      CertificateState
+      CertificateState,
+      AdminState
     ]),
     NgxsStoragePluginModule.forRoot({
       key: 'auth'

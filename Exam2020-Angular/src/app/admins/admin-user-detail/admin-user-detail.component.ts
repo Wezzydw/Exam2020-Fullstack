@@ -6,6 +6,9 @@ import {FormBuilder} from '@angular/forms';
 import {GetUser} from '../../users/shared/user.actions';
 import {DeleteUser, GetImage, LoginEmail, LogOut, UpdateUser} from '../../auth/shared/auth.action';
 import {AdminState} from '../shared/admin.state';
+import {CertificateReadAll, SetSelectedCertificate} from '../../certificates/shared/certificate.action';
+import {Certificate} from '../../certificates/shared/certificate';
+import {CertificateState} from '../../certificates/shared/certificate.state';
 
 @Component({
   selector: 'app-admin-user-detail',
@@ -21,6 +24,11 @@ export class AdminUserDetailComponent implements OnInit {
   image: File;
   userSettings;
   userForm;
+  private cert: Certificate;
+  certificates: Certificate[];
+  @Select(CertificateState.certificates)
+  certificates$: Observable<Certificate[]>;
+
   constructor(private formBuilder: FormBuilder, private store: Store) {this.userForm = this.formBuilder.group({
     name: '',
     username: '',
@@ -33,6 +41,10 @@ export class AdminUserDetailComponent implements OnInit {
     this.store.dispatch(new GetUser());
     this.selectedUser$.subscribe(res => {
       this.userSub = res;
+    });
+    this.store.dispatch(new CertificateReadAll(this.userSub.mUId));
+    this.certificates$.subscribe(res => {
+      this.certificates = res;
     });
   }
 
@@ -96,5 +108,9 @@ export class AdminUserDetailComponent implements OnInit {
   deleteUser() {
     this.store.dispatch(new DeleteUser(this.userSub.mUId));
     this.store.dispatch(new LogOut());
+  }
+
+  goToCertificateDetails(certificate: Certificate) {
+    this.store.dispatch(new SetSelectedCertificate(certificate));
   }
 }

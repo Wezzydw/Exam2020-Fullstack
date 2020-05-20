@@ -7,9 +7,10 @@
     <div fxLayout="row wrap" fxLayoutGap="4em grid">
       <div fxFlex="33"  *ngFor="let item of tableData">
         <mat-card (click)="goToDetails(item)">
-          <img mat-card-image width="300" height="200" src="{{item.mImageUrl}}" alt="">
+
           <mat-card-content>
             <mat-list>
+              <img mat-card-image width="300" height="200" src="{{item.mImage}}" alt="">
               <h3>{{item.mName}}</h3>
               <h3>{{item.mEmail}}</h3>
             </mat-list>

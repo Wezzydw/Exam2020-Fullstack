@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthUser} from '../../auth/shared/authUser';
-import {Store} from '@ngxs/store';
+import {Select, Store} from '@ngxs/store';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {SetSelectedUser} from '../shared/admin.action';
+import {CertificateReadAll} from '../../certificates/shared/certificate.action';
+import {AuthState} from '../../auth/shared/auth.state';
+import {Observable} from 'rxjs';
+import {CertificateState} from '../../certificates/shared/certificate.state';
+import {Certificate} from '../../certificates/shared/certificate';
+import {AdminState} from '../shared/admin.state';
 
 @Component({
   selector: 'app-users-view',
@@ -19,6 +25,7 @@ export class UsersViewComponent implements OnInit {
   disableNext = false;
   disablePrev = false;
 
+
   constructor(private af: AngularFirestore, private store: Store) { }
 
   ngOnInit() {
@@ -27,6 +34,7 @@ export class UsersViewComponent implements OnInit {
 
   goToDetails(user: AuthUser) {
     this.store.dispatch(new SetSelectedUser(user));
+
   }
 
   loadItems() {

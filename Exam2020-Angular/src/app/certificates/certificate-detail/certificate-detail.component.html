@@ -1,14 +1,18 @@
+<button mat-raised-button routerLink="/cert" class="active">Overview</button>
 <div *ngIf="toUpdate; then edit else view"></div>
 
 <mat-slide-toggle (change)="toUpdate=!toUpdate">update</mat-slide-toggle>
 <button mat-raised-button (click)="openDialog()">Delete certificate</button>
 
+
 <ng-template #view>
-  <mat-card>
-    <img mat-card-image src="{{certificate.mPhoto}}">
+    <img width="300" height="200" src="{{certificate.mPhoto}}">
+  <p>
     <mat-label>{{certificate.mName}}</mat-label>
+  </p>
+  <p>
     <mat-label>{{certificate.mExpirationDate}}</mat-label>
-  </mat-card>
+  </p>
 </ng-template>
 
 <ng-template #edit>

@@ -56,12 +56,12 @@ export class CertificateState {
         console.log('return ', r);
         this.certService.getImageForCertificate(certificate).then(result => {
           certificate.mPhoto = result;
-          certificate.mExpirationDate = 'testerLigeStateHer';
           console.log('ctx', certificate);
           ctx.setState({
             ...state,
             certificates: [...state.certificates, certificate]
           });
+          this.certService.updateCertificate(certificate);
         });
       });
     });

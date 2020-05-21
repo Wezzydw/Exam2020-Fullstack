@@ -9,24 +9,14 @@ import {AuthUser} from '../../auth/shared/authUser';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material';
 
 
-export const MY_FORMATS = {
-  parse: {
-    dateInput: 'MMM YYYY',
-  },
-  display: {
-    dateInput: 'LL',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY',
-  },
-};
+
 
 @Component({
   selector: 'app-certificate-add',
   templateUrl: './certificate-add.component.html',
   styleUrls: ['./certificate-add.component.css'],
   providers: [
-    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
   ],
 })
 export class CertificateAddComponent implements OnInit {
@@ -52,9 +42,7 @@ image;
 
   addCertificate() {
     const mName = this.certificateForm.get('mName').value;
-    const mExpirationDate = this.certificateForm.get('mExpirationDate').value.toLocaleString().split(',')[0];
-    console.log(mExpirationDate.toLocaleString().split(',')[0]);
-    // mExpirationDate = mExpirationDate.toString().split(' at')[0];
+    const mExpirationDate = this.certificateForm.get('mExpirationDate').value.toLocaleString().split(' ')[0].split('.').join('/');
     const mPhoto = this.certificateForm.get('mPhoto').value;
     const certificate: Certificate = {mName, mExpirationDate, mPhoto};
     console.log(certificate);

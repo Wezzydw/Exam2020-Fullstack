@@ -6,7 +6,9 @@ import {Observable} from 'rxjs';
 import {CertificateState} from '../shared/certificate.state';
 import {Certificate} from '../shared/certificate';
 import {FormControl, FormGroup} from '@angular/forms';
-import {UpdateCertificate} from '../shared/certificate.action';
+import {CertificateDelete, UpdateCertificate} from '../shared/certificate.action';
+import {MatDialog} from '@angular/material';
+import {DeleteDialogComponent} from '../../shared/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-certificate-detail',
@@ -29,7 +31,7 @@ SelectedCertificate$: Observable<Certificate>;
    mName: new FormControl(''),
    mExpirationDate: new FormControl('')
  });
-  constructor(private store: Store) { }
+  constructor(private store: Store, public dialog: MatDialog) { }
 
 
   ngOnInit() {
@@ -41,7 +43,6 @@ SelectedCertificate$: Observable<Certificate>;
     });
   }
   editCertificate() {
-    debugger;
     this.certificate.mName = this.updateForm.get('mName').value;
     this.certificate.mExpirationDate = this.updateForm.get('mExpirationDate').value;
     this.store.dispatch(new UpdateCertificate(this.certificate, this.image));
@@ -49,5 +50,10 @@ SelectedCertificate$: Observable<Certificate>;
   setImage(event) {
     this.image = event.target.files[0];
     console.log(this.image);
+  }
+
+
+  openDialog() {
+    this.dialog.open(DeleteDialogComponent);
   }
 }

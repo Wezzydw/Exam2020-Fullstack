@@ -17,7 +17,7 @@ export class CertificateEdit {
 export class CertificateDelete {
   static readonly type = '[Certificates] CertificateDelete';
 
-  constructor(public certificateUid: string) {}
+  constructor(public certificate: Certificate) {}
 }
 
 

@@ -18,7 +18,7 @@ import {UserDetailComponent} from './users/user-detail/user-detail.component';
 import {CertificateDetailComponent} from './certificates/certificate-detail/certificate-detail.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatInputModule} from '@angular/material';
+import {MatButtonModule, MatInputModule} from '@angular/material';
 import {UserState} from './users/shared/user.state';
 import {NgxsRouterPluginModule} from '@ngxs/router-plugin';
 import {NgxsStoragePluginModule} from '@ngxs/storage-plugin';
@@ -27,6 +27,7 @@ import { PopuppasswordComponent } from './shared/popuppassword/popuppassword.com
 import { MatDialogModule} from '@angular/material';
 import {CertificateState} from './certificates/shared/certificate.state';
 import {AdminState} from './admins/shared/admin.state';
+import { DeleteDialogComponent } from './shared/delete-dialog/delete-dialog.component';
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import {AdminState} from './admins/shared/admin.state';
     AppComponent,
     NavbarComponent,
     PopuppasswordComponent,
+    DeleteDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,10 +60,12 @@ import {AdminState} from './admins/shared/admin.state';
     HttpClientModule,
     BrowserAnimationsModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    MatButtonModule
   ],
   entryComponents: [
-    PopuppasswordComponent
+    PopuppasswordComponent,
+    DeleteDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

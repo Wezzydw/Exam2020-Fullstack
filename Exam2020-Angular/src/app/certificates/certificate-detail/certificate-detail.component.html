@@ -1,6 +1,7 @@
 <div *ngIf="toUpdate; then edit else view"></div>
 
 <mat-slide-toggle (change)="toUpdate=!toUpdate">update</mat-slide-toggle>
+<button mat-raised-button (click)="openDialog()">Delete certificate</button>
 
 <ng-template #view>
   <mat-card>

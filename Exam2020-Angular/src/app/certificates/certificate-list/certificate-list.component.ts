@@ -9,6 +9,8 @@ import {CertificateState} from '../shared/certificate.state';
 import {Navigate} from '@ngxs/router-plugin';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {snapshotChanges} from '@angular/fire/database';
+import {MatCardImage} from '@angular/material';
+import {element} from 'protractor';
 
 @Component({
   selector: 'app-certificate-list',
@@ -47,6 +49,8 @@ export class CertificateListComponent implements OnInit {
     });
     // this.loadItems();
   }
+
+
 
   // getAllCertificates() {
   //   this.certificates$ = this.store.dispatch(new CertificateReadAll());

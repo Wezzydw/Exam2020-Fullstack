@@ -11,7 +11,7 @@
 
 <ng-template #view>
   <div class="view">
-    <img height="200" src="{{certificate.mPhoto}}" class="photoView">
+    <img class="photoView" height="200" src="{{certificate.mPhoto}}">
   <p>
     <mat-label>{{certificate.mName}}</mat-label>
   </p>
@@ -24,7 +24,7 @@
 <ng-template #edit>
   <div class="edit">
   <form [formGroup]="updateForm" class="formField">
-    <img alt="your image" id="blah" class="photoPicker"/>
+    <img alt="your image" class="photoPicker" id="blah"/>
       <input (change)="setImage($event)"
              onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])" type="file">
     <div class="inputFields">

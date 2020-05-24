@@ -3,7 +3,6 @@
     <h1>welcome to certificate list</h1>
     <h2>username</h2>
     <button mat-raised-button routerLink="/cert/add" class="active">Add Certificate</button>
-
   </div>
   <div [fxFlexOrder]="2">
     <div fxLayout="row wrap" fxLayoutGap="4em grid">
@@ -11,7 +10,7 @@
         <mat-card (click)="goToDetails(certificate)">
           <img mat-card-image width="300" height="200" src="{{certificate.mPhoto}}" alt="">
           <mat-card-content>
-            <mat-list>
+            <mat-list class="cardInfo">
               <h3>{{certificate.mName}}</h3>
               <h3>{{certificate.mExpirationDate}}</h3>
             </mat-list>

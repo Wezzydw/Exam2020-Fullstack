@@ -1,3 +1,9 @@
 .main-component {
   margin-left: 20px;
+
+  font-family:Arial;
+  text-transform: capitalize;
+}
+.cardInfo {
+  text-align: center;
 }

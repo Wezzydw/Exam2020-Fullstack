@@ -1,22 +1,52 @@
 <p>register works!</p>
-<form [formGroup]="userForm">
-  <label>Name:
-    <input type="text" formControlName="name">
-  </label>
-  <label>Email:
-    <input type="text" formControlName="email">
-  </label>
-  <label>Username:
-    <input type="text" formControlName="userName">
-  </label>
-  <label>Password:
-    <input type="password" formControlName="password">
-  </label>
-  <label>Confirm Password:
-    <input type="password" formControlName="confirmPassword">
-  </label>
+<form [formGroup]="userForm" class="registerInput">
+  <mat-form-field appearance="standard">
+    <mat-label>
+      Name:
+    </mat-label>
+    <input matInput placeholder="Name" id="name" type="text" formControlName="name">
+  </mat-form-field>
+<p>
+  <mat-form-field appearance="standard">
+    <mat-label>
+      Email:
+    </mat-label>
+    <input matInput placeholder="Email" id="email" type="text" formControlName="email">
+  </mat-form-field>
+</p>
+  <mat-form-field appearance="standard">
+    <mat-label>
+      Username:
+    </mat-label>
+    <input matInput type="text" formControlName="userName">
+  </mat-form-field>
+  <p>
+  <mat-form-field appearance="standard">
+  <mat-label>
+    Password:
+  </mat-label>
+    <input matInput type="password" formControlName="password">
+  </mat-form-field>
+  </p>
+  <p>
+  <mat-form-field appearance="standard">
+    <mat-label>
+      Confirm Password:
+    </mat-label>
+    <input matInput type="password" formControlName="confirmPassword">
+  </mat-form-field>
+  </p>
+  <button mat-raised-button class="registerBtn" (click)="register()" >Register</button>
 </form>
-<button class="btn" (click)="register()" >Register</button>
+
 <div *ngIf="dialogOpen">
 
 </div>
+
+
+<!--<mat-form-field>-->
+<!--  <mat-label>-->
+
+<!--  </mat-label>-->
+<!--  <input matInput>-->
+<!--</mat-form-field>-->

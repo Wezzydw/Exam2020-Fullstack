@@ -1,0 +1,24 @@
+.userInputFields {
+  margin: 5px 20px;
+}
+.mName {
+  margin-right: 10px;
+}
+.mUserName {
+  margin-right: 10px;
+}
+.mEmail {
+  margin-right: 10px;
+}
+.mPhone {
+  margin-right: 10px;
+}
+.deleteUserBtn {
+  float: right;
+  background: crimson;
+}
+.userSubmit {
+  background: darkseagreen;
+  margin-left: 25px;
+  margin-top: 40px;
+}

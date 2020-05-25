@@ -5,6 +5,7 @@
   height: 200px;
 }
 .footer .footer-content {
+  border: 2px solid red;
   height: 150px;
   color: #d3d3d3;
 }
@@ -58,7 +59,7 @@
     margin-top: -84px;
   }
   85% {
-    margin-top: 110px;
+    margin-top: -110px;
   }
   100% {
     margin-top: 0;

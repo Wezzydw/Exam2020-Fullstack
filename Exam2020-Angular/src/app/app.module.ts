@@ -28,6 +28,8 @@ import { MatDialogModule} from '@angular/material';
 import {CertificateState} from './certificates/shared/certificate.state';
 import {AdminState} from './admins/shared/admin.state';
 import { DeleteDialogComponent } from './shared/delete-dialog/delete-dialog.component';
+import { FooterComponent } from './shared/footer/footer.component';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 
 @NgModule({
@@ -36,6 +38,7 @@ import { DeleteDialogComponent } from './shared/delete-dialog/delete-dialog.comp
     NavbarComponent,
     PopuppasswordComponent,
     DeleteDialogComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,8 @@ import { DeleteDialogComponent } from './shared/delete-dialog/delete-dialog.comp
     BrowserAnimationsModule,
     MatInputModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    FlexLayoutModule
   ],
   entryComponents: [
     PopuppasswordComponent,

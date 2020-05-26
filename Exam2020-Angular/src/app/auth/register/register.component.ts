@@ -29,21 +29,18 @@ export class RegisterComponent implements OnInit {
   constructor(private store: Store, private dialog: MatDialog) {
   }
 
-  ngOnInit() {
-    this.dialogOpen = false;
-  }
+  ngOnInit() {  }
 
   register() {
     const name = this.userForm.get('name').value;
     const email = this.userForm.get('email').value;
     const userName = this.userForm.get('userName').value;
-    const password = this.userForm.get('password').value;
+    const password = this.userForm.get('password').value.toString();
     const confirmPassword = this.userForm.get('password').value;
-    if (password === confirmPassword && password !== '') {
+    if (password === confirmPassword && password.length >= 6) {
       this.store.dispatch(new RegisterUser(name, email, userName, password));
-      this.dialogOpen = false;
     } else {
-      this.dialogOpen = true;
+      this.dialog.open(PopuppasswordComponent);
     }
   }
 }

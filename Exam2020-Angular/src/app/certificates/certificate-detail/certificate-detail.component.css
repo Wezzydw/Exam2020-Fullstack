@@ -1,0 +1,60 @@
+.buttons {
+
+}
+.overview {
+  margin: 20px;
+}
+.updateSlide {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+.deleteBtn {
+  float: right;
+  background: crimson;
+}
+.formField {
+  height: 500px;
+}
+.photoPicker {
+  max-height: 350px;
+  max-width: 500px;
+  height: auto;
+  width: auto;
+}
+.inputFields {
+  margin-top: 25px;
+  padding: 10px;
+}
+.inputName {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.inputExpirationDate {
+/*margin-left: 10px;*/
+}
+.submitBtn {
+  background: darkseagreen;
+  margin-left: 25px;
+  margin-top: 40px;
+}
+
+.view {
+  width: 300px;
+  position: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.photoView {
+  max-height: 350px;
+  max-width: 500px;
+  height: auto;
+  width: auto;
+}
+.edit {
+  padding: 20px;
+  width: 500px;
+  height: 400px;
+  position: center;
+  margin-left: auto;
+  margin-right: auto;
+}

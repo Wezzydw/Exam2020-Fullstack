@@ -12,15 +12,17 @@ import {
   MatButtonModule,
   MatInputModule,
   MatListModule,
-  MatDatepickerModule, MatNativeDateModule
+  MatDatepickerModule, MatNativeDateModule, MAT_DATE_FORMATS
 } from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {DeleteDialogComponent} from '../shared/delete-dialog/delete-dialog.component';
 
 
 
 @NgModule({
   declarations: [CertificateListComponent, CertificateAddComponent, CertificateDetailComponent],
+  //
   imports: [
     MatRadioModule,
     MatSlideToggleModule,
@@ -34,7 +36,23 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     MatListModule,
     FlexLayoutModule,
     MatDatepickerModule,
-    MatNativeDateModule
-  ]
+    MatNativeDateModule,
+  ],
+  providers: [
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: {
+        parse: {
+          dateInput: ['l', 'LL'],
+        },
+        display: {
+          dateInput: 'L',
+          monthYearLabel: 'MMM YYYY',
+          dateA11yLabel: 'LL',
+          monthYearA11yLabel: 'MMMM YYYY',
+        },
+      },
+    },
+  ],
 })
 export class CertificatesModule { }

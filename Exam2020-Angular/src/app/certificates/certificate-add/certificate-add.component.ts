@@ -6,11 +6,18 @@ import {CertificateAdd} from '../shared/certificate.action';
 import {AuthState} from '../../auth/shared/auth.state';
 import {Observable} from 'rxjs';
 import {AuthUser} from '../../auth/shared/authUser';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material';
+
+
+
 
 @Component({
   selector: 'app-certificate-add',
   templateUrl: './certificate-add.component.html',
-  styleUrls: ['./certificate-add.component.css']
+  styleUrls: ['./certificate-add.component.css'],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+  ],
 })
 export class CertificateAddComponent implements OnInit {
 private certificate: Certificate;
@@ -35,7 +42,7 @@ image;
 
   addCertificate() {
     const mName = this.certificateForm.get('mName').value;
-    const mExpirationDate = this.certificateForm.get('mExpirationDate').value;
+    const mExpirationDate = this.certificateForm.get('mExpirationDate').value.toLocaleString().split(' ')[0].split('.').join('/');
     const mPhoto = this.certificateForm.get('mPhoto').value;
     const certificate: Certificate = {mName, mExpirationDate, mPhoto};
     console.log(certificate);

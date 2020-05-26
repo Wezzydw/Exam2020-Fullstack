@@ -1,7 +1,7 @@
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {Injectable} from '@angular/core';
 
-import {CertificateAdd, LoadPage, NextPage, PreviousPage} from './certificate.action';
+import {CertificateAdd, CertificateDelete, LoadPage, NextPage, PreviousPage} from './certificate.action';
 import {AuthState, AuthStateModel} from '../../auth/shared/auth.state';
 
 import {CertificateService} from './certificate.service';
@@ -56,12 +56,12 @@ export class CertificateState {
         console.log('return ', r);
         this.certService.getImageForCertificate(certificate).then(result => {
           certificate.mPhoto = result;
-          certificate.mExpirationDate = 'testerLigeStateHer';
           console.log('ctx', certificate);
           ctx.setState({
             ...state,
             certificates: [...state.certificates, certificate]
           });
+          this.certService.updateCertificate(certificate);
         });
       });
     });
@@ -125,6 +125,26 @@ export class CertificateState {
         });
       });
     });
+  }
+
+  @Action(CertificateDelete)
+  certificateDelete(ctx: StateContext<CertificateStateModel>, action: CertificateDelete) {
+    const state = ctx.getState();
+    const cert = ctx.getState().certificates;
+    let temp = -1;
+    this.certService.deleteCertificate(action.certificate.mUId).then(() => {
+      cert.forEach((value, index) => { if ( value.mUId === action.certificate.mUId) {
+        temp = index;
+      }});
+      if (temp !== -1) {
+        cert.splice(temp, 1);
+        ctx.setState({
+          ...state,
+          certificates: cert
+        });
+      }
+    });
+    ctx.dispatch(new Navigate(['cert']));
   }
 
   // @Action(LoadPage)

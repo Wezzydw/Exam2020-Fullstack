@@ -1,43 +1,41 @@
 <div *ngIf="loggedInUser$ | async as user">
 
 
-<form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm.value)">
-<mat-form-field appearance="standard">
+<form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm.value)" class="userInputFields">
+<mat-form-field appearance="standard" class="mName">
   <mat-label>
    {{user.mName}}
   </mat-label>
   <input matInput placeholder="Name" id="name" type="text" formControlName="name" value="{{user.mName}}">
-  <mat-hint>Hint</mat-hint>
+  <mat-hint>Name</mat-hint>
 </mat-form-field>
-  <mat-form-field appearance="standard">
+  <mat-form-field appearance="standard" class="mUserName">
     <mat-label>
       {{user.mUserName}}
     </mat-label>
     <input matInput placeholder="Username" id="username" type="text" formControlName="username" value="{{user.mUserName}}">
-    <mat-hint>Hint</mat-hint>
+    <mat-hint>Username</mat-hint>
   </mat-form-field>
-  <mat-form-field appearance="standard">
+  <mat-form-field appearance="standard" class="mEmail">
     <mat-label>
       {{user.mEmail}}
     </mat-label>
     <input matInput placeholder="Email" id="email" type="text" formControlName="email" value="{{user.mEmail}}">
-    <mat-hint>Hint</mat-hint>
+    <mat-hint>E-Mail</mat-hint>
   </mat-form-field>
-  <mat-form-field appearance="standard">
+  <mat-form-field appearance="standard" class="mPhone">
     <mat-label>
       {{user.mPhone}}
     </mat-label>
     <input matInput placeholder="Phone" id="phone" type="number" formControlName="phone" value="{{user.mPhone}}">
-    <mat-hint>Hint</mat-hint>
+    <mat-hint>Phone</mat-hint>
   </mat-form-field>
   <input type="file" (change)="imageFileSet($event)">
-  <button mat-raised-button color="primary">Submit</button>
-
-
-
+  <button mat-raised-button class="userSubmit">Submit</button>
 </form>
+
   <img [src]="user.mImageUrl" height="200px" *ngIf="user.mImageUrl">
 </div>
-<button mat-raised-button color="primary" (click)="deleteUser()" style="color: red">DeleteUser</button>
+<button mat-raised-button (click)="deleteUser()" class="deleteUserBtn">DeleteUser</button>
 
 

@@ -1,0 +1,64 @@
+<div *ngIf="selectedUser$ | async as user">
+
+
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm.value)" class="user">
+    <mat-form-field appearance="standard" class="name">
+      <mat-label>
+        {{user.mName}}
+      </mat-label>
+      <input matInput placeholder="Name" id="name" type="text" formControlName="name" value="{{user.mName}}">
+      <mat-hint>Name</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="standard" class="userName">
+      <mat-label>
+        {{user.mUserName}}
+      </mat-label>
+      <input matInput placeholder="Username" id="username" type="text" formControlName="username" value="{{user.mUserName}}">
+      <mat-hint>Username</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="standard" class="email">
+      <mat-label>
+        {{user.mEmail}}
+      </mat-label>
+      <input matInput placeholder="Email" id="email" type="text" formControlName="email" value="{{user.mEmail}}">
+      <mat-hint>Email</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="standard" class="phone">
+      <mat-label>
+        {{user.mPhone}}
+      </mat-label>
+      <input matInput placeholder="Phone" id="phone" type="number" formControlName="phone" value="{{user.mPhone}}">
+      <mat-hint>Phone</mat-hint>
+    </mat-form-field>
+    <input type="file" (change)="imageFileSet($event)">
+    <button mat-raised-button color="primary">Submit</button>
+  </form>
+
+  <img [src]="user.mImage" height="200px" *ngIf="user.mImage">
+</div>
+
+<button mat-raised-button color="primary" (click)="deleteUser()" style="color: red">DeleteUser</button>
+
+<div class="main-component" fxLayout="column" fxLayoutGap="2em">
+  <div [fxFlexOrder]="1">
+    <h1>User certificates</h1>
+
+  </div>
+  <div [fxFlexOrder]="2">
+    <div fxLayout="row wrap" fxLayoutGap="4em grid">
+      <div fxFlex="33"  *ngFor="let certificate of certificates">
+        <mat-card (click)="goToCertificateDetails(certificate)">
+          <img mat-card-image width="300" height="200" src="{{certificate.mPhoto}}" alt="">
+          <mat-card-content>
+            <mat-list>
+              <h3>{{certificate.mName}}</h3>
+              <h3>{{certificate.mExpirationDate}}</h3>
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
+
+

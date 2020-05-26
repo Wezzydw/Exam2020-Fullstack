@@ -6,6 +6,7 @@ import {AngularFireStorage} from '@angular/fire/storage';
 import {from, Observable} from 'rxjs';
 import {Certificate} from './certificate';
 import {map} from 'rxjs/operators';
+import DateTimeFormat = Intl.DateTimeFormat;
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,16 @@ export class CertificateService {
   constructor(private af: AngularFirestore, private as: AngularFireStorage) { }
   certificateAdd(certificate: Certificate) {
     return this.af.collection('certificates').add(certificate);
+  }
+
+  deleteCertificate(mUId: string): Promise<string> {
+    return this.af.collection<Certificate>('certificates').doc(mUId).delete().then(() => {
+      console.log('Certificate was deleted successfully');
+      return mUId;
+    });
+    // this.afAuth.auth.currentUser.delete().then(r => {
+    //   console.log('Delete succesfull', r);
+    // });
   }
 
 

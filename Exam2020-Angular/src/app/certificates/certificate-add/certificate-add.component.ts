@@ -42,7 +42,8 @@ image;
 
   addCertificate() {
     const mName = this.certificateForm.get('mName').value;
-    const mExpirationDate = this.certificateForm.get('mExpirationDate').value.toLocaleString().split(' ')[0].split('.').join('/');
+    console.log(this.certificateForm.get('mExpirationDate').value.toLocaleString());
+    const mExpirationDate = this.certificateForm.get('mExpirationDate').value.toLocaleString().split(', ')[0].split('.').join('/');
     const mPhoto = this.certificateForm.get('mPhoto').value;
     const certificate: Certificate = {mName, mExpirationDate, mPhoto};
     console.log(certificate);

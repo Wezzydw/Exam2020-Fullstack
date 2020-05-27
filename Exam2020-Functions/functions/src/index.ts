@@ -1,13 +1,10 @@
 import * as functions from 'firebase-functions';
 import * as admin from "firebase-admin";
+import {AuthUser} from "./AuthUser";
 admin.initializeApp();
 // // Start writing Firebase Functions
 // // https://firebase.google.com/docs/functions/typescript
 //
-export const buubu = functions.https.onRequest((request, response) => {
- response.send("Hello from Firebase!");
-});
-
 exports.profileImageAdded = functions.storage.object().onFinalize((object) => {
   return new Promise((resolve, reject) => {
     if (object && object.metadata && object.name) {
@@ -54,4 +51,13 @@ exports.onCertificateDelete = functions.firestore.document('certificates/{uid}')
     }
   });
 });
-
+exports.onUserCreated = functions.firestore.document('users/{uid}').onCreate((snapshot, context) => {
+  return new Promise( async (resolve, reject) => {
+    const user = snapshot.data() as AuthUser;
+    if (user) {
+      user.administrator = false;
+      await admin.firestore().doc('users/' + user.mUId).update('administrator', false);
+      resolve(user);
+    }
+  });
+});

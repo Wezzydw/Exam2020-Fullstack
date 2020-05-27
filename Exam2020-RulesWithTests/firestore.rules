@@ -6,8 +6,8 @@ service cloud.firestore {
       allow write, create, update, delete: if get(/databases/$(database)/documents/users/$(request.auth.uid)).data.administrator == true;
     }
     match /users/{userId} {
-      allow create: if true;
-      allow read, update, delete: if request.auth.uid == userId;
+      allow create, read: if true;
+      allow update, delete: if request.auth.uid == userId;
     }
     match /certificates/{certId} {
       allow create: if request.auth.uid != null;

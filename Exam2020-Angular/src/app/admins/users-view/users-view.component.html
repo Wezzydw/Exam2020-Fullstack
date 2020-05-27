@@ -1,0 +1,37 @@
+<div class="main-component" fxLayout="column" fxLayoutGap="2em" class="usersOverview">
+  <div [fxFlexOrder]="1">
+    <h1>welcome to the users-view</h1>
+    <h2>username</h2>
+  </div>
+  <div [fxFlexOrder]="2">
+    <div fxLayout="row wrap" fxLayoutGap="4em grid">
+      <div fxFlex="33"  *ngFor="let item of tableData">
+        <mat-card (click)="goToDetails(item)">
+
+          <mat-card-content>
+            <mat-list>
+              <img mat-card-image width="300" height="200" src="{{item.mImage}}" alt="">
+              <h3>{{item.mName}}</h3>
+              <h3>{{item.mEmail}}</h3>
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pagination">
+  <div class="text-center">
+    <button mat-raised-button color="primary" class="btn btn btn-info btn-sm float-left" (click)="prevPage()"
+            [disabled]="disablePrev || !(paginationClickedCount>0)">Previous</button> <b class="pageNr">Page no: {{paginationClickedCount+1}}</b>
+    <button mat-raised-button color="primary" class="btn btn btn-info btn-sm float-right" (click)="nextPage()" [disabled]="disableNext">Next</button>
+  </div>
+<!--  <table class="table">-->
+<!--    <tbody>-->
+<!--    <tr *ngFor="let item of tableData">-->
+<!--      <td>{{item.mName}}</td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--  </table>-->
+</div>

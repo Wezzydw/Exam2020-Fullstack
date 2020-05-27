@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {Action, Selector, State, StateContext} from '@ngxs/store';
 import {AuthService} from './auth.service';
 
-import {GetImage, GetUser, LoginEmail, UpdateUser, LogOut, RegisterUser} from './auth.action';
+import {GetImage, GetUser, LoginEmail, UpdateUser, LogOut, RegisterUser, DeleteUser} from './auth.action';
 import {tap} from 'rxjs/operators';
 import {UserService} from '../../users/shared/user.service';
 import {Navigate} from '@ngxs/router-plugin';
@@ -64,28 +64,28 @@ export class AuthState {
   }
 
   @Action(UpdateUser)
-  update(ctx: StateContext<AuthStateModel>, {payload, image}: UpdateUser) {
+  async update(ctx: StateContext<AuthStateModel>, {payload, image}: UpdateUser) {
     if (image != null) {
       console.log('ImagenotNull');
-      this.userService.uploadImage(image, payload.mUId).then( a => {
+      await this.userService.uploadImage(image, payload.mUId).then( a => {
         console.log('waiting', a);
-        this.userService.updateUser(payload);
-        const user = AuthState.loggedInUser(ctx.getState());
         console.log('before getimage');
         return this.userService.getImage(payload.mUId).then(result => {
           console.log('before ctx')
           payload.mImageUrl = result;
-          ctx.setState({
-            ...ctx.getState(),
-            loggedInUser: payload
-          });
+          this.userService.updateUser(payload);
         });
+      });
+      ctx.setState({
+        ...ctx.getState(),
+        loggedInUser: payload
       });
 
     } else {
       this.userService.updateUser(payload);
       const user = AuthState.loggedInUser(ctx.getState());
       console.log('before getimage');
+
       return this.userService.getImage(payload.mUId).then(result => {
         console.log('before ctx')
         payload.mImageUrl = result;
@@ -140,4 +140,10 @@ export class AuthState {
       );
   }
 
+  @Action(DeleteUser)
+  deleteUser(ctx: StateContext<AuthStateModel>, {uid}: DeleteUser) {
+    const state = ctx.getState();
+    this.authService.deleteUser();
+
+  }
 }

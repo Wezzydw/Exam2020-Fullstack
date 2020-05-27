@@ -22,6 +22,7 @@ export class UserService {
       map(value => {
         const data = value.payload.data() as AuthUser;
         data.mUId = value.payload.id;
+        data.mCertificateList = value.payload.data().mCertificateList;
         return data;
       })
     );
@@ -43,5 +44,11 @@ export class UserService {
   }
   getImage(uid: string): Promise<string>  {
     return this.as.ref('images/' + uid + '/profilePicture').getDownloadURL().toPromise();
+  }
+
+  deleteUser(uid: string) {
+    this.af.doc('users/' + uid).delete().then(r => {
+      console.log('delete succesfull', r);
+    });
   }
 }

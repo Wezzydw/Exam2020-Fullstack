@@ -1,0 +1,142 @@
+
+.footer {
+  background: #2e2c31;
+  color: #dfdfdf;
+  height: 100px;
+  width: 100%;
+
+}
+.footer .footer-content {
+
+  height: 45px;
+  color: #d3d3d3;
+
+}
+.all-wrap {
+  min-height: 100vh;
+}
+.page-wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.content {
+  flex: 2;
+}
+.footHeader {
+  margin: 20px;
+}
+.row {
+  position: relative;
+}
+.fa-fast-forward {
+  position: absolute;
+  padding: 9px 0 0 8px;
+  font-size: 18px;
+  color: darkred;
+}
+* { box-sizing: border-box; }
+$duration: 700s;
+
+@-webkit-keyframes ticker {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+
+  100% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+@keyframes ticker {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+
+  100% {
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+.ticker-wrap {
+
+
+  bottom: 0;
+  max-width: 100%;
+  overflow: hidden;
+  height: 4rem;
+  background-color: rgba(#000, 0.9);
+  padding-left: 100%;
+  box-sizing: content-box;
+
+  .ticker {
+
+    display: inline-block;
+    height: 4rem;
+    line-height: 4rem;
+    white-space: nowrap;
+    padding-right: 100%;
+    box-sizing: content-box;
+
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-name: ticker;
+    animation-name: ticker;
+    -webkit-animation-duration: $duration;
+    animation-duration: $duration;
+
+    &__item {
+
+      display: inline-block;
+
+      padding: 0 2rem;
+      font-size: 2rem;
+      color: white;
+
+    }
+  }
+}
+
+.newsItems {
+  color: cornsilk;
+  text-decoration: none;
+}
+
+
+
+
+body { padding-bottom: 5rem; }
+h1,h2,p {padding: 0 5%;}
+//.news-ticker {
+//  box-sizing: content-box;
+//  height: 20px;
+//  overflow: hidden;
+//  padding: 5px 10px 10px 10px;
+//}
+//.news-ticker ul {
+//  padding: 0;
+//  margin-left: 30px;
+//  list-style: none;
+//  animation: ticker 12s infinite;
+//
+//}
+//@keyframes ticker {
+//  from { margin-top: 0; }
+//  to   { margin-top: -200px; }
+//}
+//
+//.news-ticker ul:hover {
+//  animation-play-state: paused;
+//}
+//.news-ticker ul li {
+//  font-size: 20px;
+//  line-height: 27px;
+//}

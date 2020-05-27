@@ -6,6 +6,7 @@ import {CertificateDetailComponent} from './certificates/certificate-detail/cert
 import {canActivate} from '@angular/fire/auth-guard';
 import {AuthGuard} from './auth/authGuard/auth.guard';
 
+
 const routes: Routes = [
   {
     path: 'auth',
@@ -21,6 +22,7 @@ const routes: Routes = [
     loadChildren: () => import('./certificates/certificates.module').then(m => m.CertificatesModule),
     canActivate: [AuthGuard]
   },
+  { path: 'admin', loadChildren: () => import('./admins/admins.module').then(m => m.AdminsModule)},
   { path: '', redirectTo: '', pathMatch: 'full'}
 
 ];

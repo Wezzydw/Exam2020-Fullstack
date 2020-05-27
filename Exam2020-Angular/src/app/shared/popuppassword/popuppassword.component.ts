@@ -8,11 +8,15 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 })
 export class PopuppasswordComponent {
 
-
+public message = 'Passwords must be atleast 6 characters and matching';
 
   constructor(
-    public dialogRef: MatDialogRef<PopuppasswordComponent>,
-    @Inject(MAT_DIALOG_DATA) public message: string) { }
+    public dialogRef: MatDialogRef<PopuppasswordComponent>) { }
+
+
+  closeWindow() {
+    this.dialogRef.close();
+  }
 
 
 }

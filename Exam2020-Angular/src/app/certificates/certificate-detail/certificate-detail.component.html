@@ -1,1 +1,61 @@
-<p>certificate-detail works!</p>
+<div class="buttons">
+<button class="overview" mat-raised-button routerLink="/cert">Overview</button>
+  <mat-slide-toggle (change)="toUpdate=!toUpdate" class="updateSlide">update</mat-slide-toggle>
+  <button (click)="openDialog()" class="overview deleteBtn" mat-raised-button>Delete certificate</button>
+</div>
+<div *ngIf="toUpdate; then edit else view"></div>
+
+
+
+
+
+<ng-template #view>
+  <div class="view">
+    <img class="photoView" height="200" src="{{certificate.mPhoto}}">
+  <p>
+    <mat-label>{{certificate.mName}}</mat-label>
+  </p>
+  <p>
+    <mat-label>{{certificate.mExpirationDate}}</mat-label>
+  </p>
+  </div>
+</ng-template>
+
+<ng-template #edit>
+  <div class="edit">
+  <form [formGroup]="updateForm" class="formField">
+    <img alt="your image" class="photoPicker" id="blah"/>
+      <input (change)="setImage($event)"
+             onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])" type="file">
+    <div class="inputFields">
+    <mat-form-field appearance="outline" class="inputName">
+      <mat-label>Name</mat-label>
+      <input formControlName="mName" id="name" matInput type="text" value="">
+      <mat-hint>Certificate</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="inputExpirationDate">
+      <mat-label>Expiration Date</mat-label>
+      <input [matDatepicker]="datePicker" formControlName="mExpirationDate" id="expirationDate" matInput type="text" value="">
+      <mat-datepicker-toggle [for]="datePicker" matSuffix></mat-datepicker-toggle>
+      <mat-datepicker #datePicker></mat-datepicker>
+      <mat-hint>Certificate</mat-hint>
+    </mat-form-field>
+    </div>
+    <button (click)="editCertificate()" class="submitBtn" mat-raised-button>Submit Changes</button>
+  </form>
+  </div>
+</ng-template>
+
+
+
+<!--<ng-template #guest>-->
+<!-- mExpirationDate -->
+
+<!--</ng-template>-->
+
+<!--<ng-template #authenticated>-->
+<!--  <div *ngIf="loggedInUser$ | async as user">-->
+<!--    <h1>You are logged in as {{user.mEmail}}</h1>-->
+<!--    <button (click)="logOut()">Log out</button>-->
+<!--  </div>-->
+<!--</ng-template>-->

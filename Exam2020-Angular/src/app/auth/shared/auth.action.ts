@@ -35,3 +35,8 @@ export class RegisterUser {
   constructor(public name: string, public email: string, public userName: string, public password: string) {}
 
 }
+export class DeleteUser {
+  static readonly type = '[Auth] DeleteUser';
+  constructor(public uid: string) {
+  }
+}

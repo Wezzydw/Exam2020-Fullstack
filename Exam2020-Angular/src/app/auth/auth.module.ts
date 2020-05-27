@@ -5,7 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AuthRoutingModule} from './auth-routing.module';
 import {ReactiveFormsModule} from '@angular/forms';
-import {MatDialogModule} from '@angular/material';
+import {MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 
 
 
@@ -17,7 +17,10 @@ import {MatDialogModule} from '@angular/material';
     AuthRoutingModule,
     AngularFireAuthModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
   ]
 })
 export class AuthModule { }

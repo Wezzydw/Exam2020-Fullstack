@@ -1,0 +1,35 @@
+mat-form-field {
+  margin-right: 12px;
+}
+.active {
+  margin: 5px 20px;
+}
+.submit {
+  margin: 5px 20px;
+}
+.photoView {
+  max-height: 350px;
+  max-width: 500px;
+  height: auto;
+  width: auto;
+}
+.addForm {
+  padding: 20px;
+  width: 500px;
+  height: 400px;
+  position: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.inputFields {
+  margin-top: 25px;
+  padding: 10px;
+}
+.submitBtn {
+  height: 36px;
+  width: 135px;
+   background: darkseagreen;
+   /*margin-left: 15px;*/
+   margin-top: 40px;
+ }
+

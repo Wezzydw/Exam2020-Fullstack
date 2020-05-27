@@ -1,0 +1,19 @@
+main {
+  display: flex;
+  flex-direction: column;
+  *:not(router-outlet){
+    flex: 1;
+    display: block;
+  }
+}
+.all-wrap {
+  min-height: 100vh;
+}
+.page-wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.content {
+  flex: 1;
+}

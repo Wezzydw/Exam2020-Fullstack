@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {AppComponent} from './app.component';
-import {UserDetailComponent} from './users/user-detail/user-detail.component';
-import {CertificateDetailComponent} from './certificates/certificate-detail/certificate-detail.component';
 
 const routes: Routes = [
   {
@@ -11,6 +8,7 @@ const routes: Routes = [
   },
   { path: 'user', loadChildren: () => import('./users/users.module').then(m => m.UsersModule)},
   { path: 'cert', loadChildren: () => import('./certificates/certificates.module').then(m => m.CertificatesModule)},
+  { path: 'admin', loadChildren: () => import('./admins/admins.module').then(m => m.AdminsModule)},
   { path: '', redirectTo: '', pathMatch: 'full'}
 
 ];

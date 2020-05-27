@@ -1,1 +1,27 @@
-<p>certificate-add works!</p>
+<button mat-raised-button routerLink="/cert" class="active">Overview</button>
+<div class="addForm">
+<form [formGroup]="certificateForm" >
+  <img id="blah" alt="your image" class="photoView"/>
+  <input type="file"
+         onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])" (change)="setImage($event)">
+  <div class="inputFields">
+  <mat-form-field appearance="outline">
+    <mat-label>Name</mat-label>
+    <input matInput id="name" type="text" formControlName="mName" value="">
+    <mat-hint>Certificate</mat-hint>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Expiration Date</mat-label>
+    <input matInput [matDatepicker]="datePicker" id="expirationDate" type="text" formControlName="mExpirationDate" value="">
+    <mat-datepicker-toggle [for]="datePicker" matSuffix></mat-datepicker-toggle>
+    <mat-datepicker #datePicker></mat-datepicker>
+    <mat-hint>Certificate</mat-hint>
+  </mat-form-field>
+    <button mat-raised-button (click)="addCertificate()" class="submitBtn">Submit</button>
+  </div>
+</form>
+
+</div>
+<div class="submit">
+
+</div>

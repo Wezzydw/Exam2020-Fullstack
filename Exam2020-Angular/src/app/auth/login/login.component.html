@@ -1,17 +1,33 @@
-<p>login works!</p>
-<div>
+
+<div *ngIf="loggedInUser$ | async; then authenticated else guest">
 
 </div>
-<div>
-  <form [formGroup]="loginForm">
-  <label>
-    Email:
-    <input type="text" formControlName="email">
-  </label>
-  <label>
-    Password:
-    <input type="text" formControlName="password">
-  </label>
-  <button (click)="loginWithEmail()">Log in</button>
-  </form>
-</div>
+<ng-template #guest>
+  <div>
+    <form [formGroup]="loginForm" class="loginInput">
+      <mat-form-field appearance="standard">
+        <mat-label>
+          Email:
+        </mat-label>
+        <input matInput placeholder="Email" id="email" type="text" formControlName="email">
+      </mat-form-field>
+      <p>
+        <mat-form-field appearance="standard">
+          <mat-label>
+            Password:
+          </mat-label>
+          <input matInput type="password" formControlName="password">
+        </mat-form-field>
+      </p>
+      <button mat-raised-button (click)="loginWithEmail()" class="loginBtn">Log in</button>
+      <button mat-raised-button routerLink="/auth/register" >Register </button>
+    </form>
+  </div>
+</ng-template>
+
+<ng-template #authenticated>
+  <div *ngIf="loggedInUser$ | async as user">
+    <h1>You are logged in as {{user.mEmail}}</h1>
+    <button mat-raised-button (click)="logOut()">Log out</button>
+  </div>
+</ng-template>

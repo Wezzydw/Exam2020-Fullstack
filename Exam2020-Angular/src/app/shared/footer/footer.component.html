@@ -1,0 +1,12 @@
+<div class="footer">
+  <h2 class="footHeader">News:</h2>
+  <div class="footer-content">
+    <div class="ticker-wrap">
+      <div class="ticker">
+        <div class="ticker__item" *ngFor="let newsItem of news">
+          <a href="{{newsItem.url}}" target="_blank" class="newsItems">{{newsItem.title.concat("...")}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

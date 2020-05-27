@@ -1,0 +1,26 @@
+API endpoint: http://localhost:8080
+If you are using a library that supports the FIRESTORE_EMULATOR_HOST environment variable, run:
+
+   export FIRESTORE_EMULATOR_HOST=localhost:8080
+
+Dev App Server is now running.
+
+May 27, 2020 11:00:06 AM io.gapi.emulators.netty.HttpVersionRoutingHandler channelRead
+INFO: Detected HTTP/2 connection.
+May 27, 2020 11:00:07 AM com.google.cloud.datastore.emulator.impl.util.WrappedStreamObserver onError
+INFO: operation failed: 
+Null value error. for 'create' @ L6, Null value error. for 'create' @ L13
+May 27, 2020 11:00:07 AM com.google.cloud.datastore.emulator.impl.util.WrappedStreamObserver onError
+INFO: operation failed: 
+Null value error. for 'update' @ L6, Null value error. for 'update' @ L14
+May 27, 2020 11:00:07 AM com.google.cloud.datastore.emulator.impl.util.WrappedStreamObserver onError
+INFO: operation failed: 
+false for 'update' @ L6, false for 'update' @ L14
+May 27, 2020 11:00:08 AM com.google.cloud.datastore.emulator.impl.util.WrappedStreamObserver onError
+INFO: operation failed: 
+false for 'update' @ L6, false for 'update' @ L10
+May 27, 2020 11:00:08 AM com.google.cloud.datastore.emulator.impl.util.WrappedStreamObserver onError
+INFO: operation failed: 
+Null value error. for 'update' @ L6, Null value error. for 'update' @ L10
+*** shutting down gRPC server since JVM is shutting down
+*** server shut down

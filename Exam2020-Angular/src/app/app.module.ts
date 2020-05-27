@@ -30,6 +30,7 @@ import {AdminState} from './admins/shared/admin.state';
 import { DeleteDialogComponent } from './shared/delete-dialog/delete-dialog.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import { DeleteUserDialogComponent } from './shared/delete-user-dialog/delete-user-dialog.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     PopuppasswordComponent,
     DeleteDialogComponent,
     FooterComponent,
+    DeleteUserDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,7 +71,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
   ],
   entryComponents: [
     PopuppasswordComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    DeleteUserDialogComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

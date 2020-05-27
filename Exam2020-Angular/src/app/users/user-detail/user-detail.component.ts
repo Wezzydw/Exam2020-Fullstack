@@ -8,6 +8,8 @@ import {Observable} from 'rxjs';
 import {DeleteUser, GetImage, LoginEmail, LogOut, UpdateUser} from '../../auth/shared/auth.action';
 import {AuthUser} from '../../auth/shared/authUser';
 import {AuthState} from '../../auth/shared/auth.state';
+import {MatDialog} from '@angular/material';
+import {DeleteUserDialogComponent} from '../../shared/delete-user-dialog/delete-user-dialog.component';
 
 @Component({
   selector: 'app-user-detail',
@@ -23,7 +25,7 @@ export class UserDetailComponent implements OnInit {
   image: File;
   userSettings;
   userForm;
-  constructor(private formBuilder: FormBuilder, private store: Store) {this.userForm = this.formBuilder.group({
+  constructor(private formBuilder: FormBuilder, private store: Store, private dialogRef: MatDialog) {this.userForm = this.formBuilder.group({
     name: '',
     username: '',
     phone: '',
@@ -96,7 +98,6 @@ export class UserDetailComponent implements OnInit {
     this.store.dispatch(new GetImage(uid));
   }
   deleteUser() {
-    this.store.dispatch(new DeleteUser(this.userSub.mUId));
-    this.store.dispatch(new LogOut());
+    this.dialogRef.open(DeleteUserDialogComponent);
   }
 }

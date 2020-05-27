@@ -104,10 +104,6 @@ export class AdminUserDetailComponent implements OnInit {
   getProfilePic(uid: string) {
     this.store.dispatch(new GetImage(uid));
   }
-  deleteUser() {
-    debugger;
-    this.store.dispatch(new DeleteUser(this.userSub.mUId));
-  }
 
   goToCertificateDetails(certificate: Certificate) {
     this.store.dispatch(new SetSelectedCertificate(certificate));

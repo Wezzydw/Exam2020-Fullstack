@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {News} from '../models/news';
 import {NewsService} from '../services/news.service';
+import {element} from 'protractor';
 
 @Component({
   selector: 'app-footer',
@@ -9,7 +10,7 @@ import {NewsService} from '../services/news.service';
 })
 export class FooterComponent implements OnInit {
   news: News[];
-
+  color = '0s';
   constructor(private newsService: NewsService) { }
 
   ngOnInit() {
@@ -19,6 +20,7 @@ export class FooterComponent implements OnInit {
   getAllNews() {
     this.newsService.getAllNews().subscribe(a => {
       this.news = a;
+      this.color = a.length * 9 + 's';
     });
   }
 }

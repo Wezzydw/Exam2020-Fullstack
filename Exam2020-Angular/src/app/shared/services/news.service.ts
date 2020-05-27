@@ -7,7 +7,7 @@ import {News} from '../models/news';
   providedIn: 'root'
 })
 export class NewsService {
-url = 'https://localhost:44326/api/news';
+url = 'https://localhost:5001/api/news';
 
   constructor(private client: HttpClient) { }
 

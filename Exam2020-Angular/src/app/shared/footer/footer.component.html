@@ -2,7 +2,7 @@
   <h2 class="footHeader">News:</h2>
   <div class="footer-content">
     <div class="ticker-wrap">
-      <div class="ticker">
+      <div class="ticker" [style.animation-duration]="color" [style.-webkit-animation-duration]="color">
         <div class="ticker__item" *ngFor="let newsItem of news">
           <a href="{{newsItem.url}}" target="_blank" class="newsItems">{{newsItem.title.concat("...")}}</a>
         </div>

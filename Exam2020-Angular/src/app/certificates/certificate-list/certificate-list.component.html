@@ -5,7 +5,7 @@
     <button mat-raised-button routerLink="/cert/add" class="active">Add Certificate</button>
   </div>
   <div [fxFlexOrder]="2">
-    <div fxLayout="row wrap" fxLayoutGap="4em grid">
+    <div fxLayout="row wrap" fxLayoutGap="4em grid" fx class="certList">
       <div fxFlex="33"  *ngFor="let certificate of certificates">
         <mat-card (click)="goToDetails(certificate)">
           <img mat-card-image width="300" height="200" src="{{certificate.mPhoto}}" alt="">

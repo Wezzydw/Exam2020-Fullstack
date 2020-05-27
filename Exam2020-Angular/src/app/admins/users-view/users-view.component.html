@@ -4,7 +4,7 @@
     <h2>username</h2>
   </div>
   <div [fxFlexOrder]="2">
-    <div fxLayout="row wrap" fxLayoutGap="4em grid">
+    <div fxLayout="row wrap" fxLayoutGap="4em grid" style="max-width: 100%">
       <div fxFlex="33"  *ngFor="let item of tableData">
         <mat-card (click)="goToDetails(item)">
 

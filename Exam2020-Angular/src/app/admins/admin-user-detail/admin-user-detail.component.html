@@ -45,7 +45,7 @@
 
   </div>
   <div [fxFlexOrder]="2">
-    <div fxLayout="row wrap" fxLayoutGap="4em grid">
+    <div fxLayout="row wrap" fxLayoutGap="4em grid" style="max-width: 100%">
       <div fxFlex="33"  *ngFor="let certificate of certificates">
         <mat-card (click)="goToCertificateDetails(certificate)">
           <img mat-card-image width="300" height="200" src="{{certificate.mPhoto}}" alt="">

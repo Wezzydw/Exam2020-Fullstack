@@ -44,7 +44,7 @@ export class AuthState {
              userName: result.mUserName
            });
            ctx.dispatch(new GetUser(result.mUId));
-           ctx.dispatch(new Navigate(['/']));
+           ctx.dispatch(new Navigate(['cert']));
          })
        );
   }
@@ -131,11 +131,14 @@ export class AuthState {
       .registerUser(action.email, action.password)
       .pipe(
         tap((result) => {
+          result.mName = action.name;
+          result.mUserName = action.userName;
+          this.authService.createUserInDatabase(result);
           ctx.setState({
             ...state,
             loggedInUser: result
           });
-          // ctx.dispatch()
+          ctx.dispatch(new Navigate(['cert']));
         })
       );
   }

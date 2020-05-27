@@ -63,4 +63,8 @@ export class AuthService {
       console.log('Delete succesfull', r);
     });
   }
+
+  createUserInDatabase(user: AuthUser){
+    this.firestore.doc('users/' + user.mUId).set(user).then().catch();
+  }
 }

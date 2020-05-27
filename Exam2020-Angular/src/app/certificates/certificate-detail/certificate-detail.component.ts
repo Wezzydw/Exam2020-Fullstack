@@ -7,13 +7,16 @@ import {CertificateState} from '../shared/certificate.state';
 import {Certificate} from '../shared/certificate';
 import {FormControl, FormGroup} from '@angular/forms';
 import {CertificateDelete, UpdateCertificate} from '../shared/certificate.action';
-import {MatDialog} from '@angular/material';
+import {MAT_DATE_LOCALE, MatDialog} from '@angular/material';
 import {DeleteDialogComponent} from '../../shared/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-certificate-detail',
   templateUrl: './certificate-detail.component.html',
-  styleUrls: ['./certificate-detail.component.css']
+  styleUrls: ['./certificate-detail.component.css'],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+  ],
 })
 export class CertificateDetailComponent implements OnInit {
 private user: AuthUser;
@@ -44,7 +47,7 @@ SelectedCertificate$: Observable<Certificate>;
   }
   editCertificate() {
     this.certificate.mName = this.updateForm.get('mName').value;
-    this.certificate.mExpirationDate = this.updateForm.get('mExpirationDate').value;
+    this.certificate.mExpirationDate = this.updateForm.get('mExpirationDate').value.toLocaleString().split(' ')[0].split('.').join('/');
     this.store.dispatch(new UpdateCertificate(this.certificate, this.image));
   }
   setImage(event) {

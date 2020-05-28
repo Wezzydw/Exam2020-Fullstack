@@ -1,11 +1,5 @@
 {
-  "targets": {
-    "certificate-project-fbc50": {
-      "hosting": {
-        "Exam2020": [
-          "certificate-project-fbc50"
-        ]
-      }
-    }
+  "projects": {
+    "default": "certificate-project-fbc50"
   }
 }

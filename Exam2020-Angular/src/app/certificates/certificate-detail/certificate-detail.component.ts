@@ -19,10 +19,10 @@ import {DeleteDialogComponent} from '../../shared/delete-dialog/delete-dialog.co
   ],
 })
 export class CertificateDetailComponent implements OnInit {
-private user: AuthUser;
-private certificate: Certificate;
-private toUpdate = false;
-private image: File;
+ user: AuthUser;
+ certificate: Certificate;
+ toUpdate = false;
+ image: File;
 
 @Select(AuthState.loggedInUser)
 LoggedInUser$: Observable<AuthUser>;

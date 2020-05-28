@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {News} from '../models/news';
 import {NewsService} from '../services/news.service';
-import {element} from 'protractor';
 
 @Component({
   selector: 'app-footer',

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {CertificateDetailComponent} from '../certificates/certificate-detail/certificate-detail.component';
 import {UserDetailComponent} from './user-detail/user-detail.component';
 
 const routes: Routes = [

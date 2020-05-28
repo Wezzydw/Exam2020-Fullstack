@@ -47,16 +47,11 @@ export class CertificateState {
 
     return this.certService.certificateAdd(certificate).then(value => {
       value.set({mUId: value.id}, {merge: true}).then(() => {
-        console.log('id has been set');
       });
-      console.log('value', value.id);
       certificate.mUId = value.id;
-      console.log('mUID FOR CERT', certificate.mUId);
       this.certService.certificateImageUpload('images/' + certificate.mUserUid + '/certificates/' + certificate.mUId, image).then(r => {
-        console.log('return ', r);
         this.certService.getImageForCertificate(certificate).then(result => {
           certificate.mPhoto = result;
-          console.log('ctx', certificate);
           ctx.setState({
             ...state,
             certificates: [...state.certificates, certificate]
@@ -67,17 +62,6 @@ export class CertificateState {
     });
   }
 
-
-  // @Action(CertificateAdd)
-  // certificateAdd(ctx: StateContext<CertificateStateModel>, action: CertificateAdd) {
-  //   const state = ctx.getState();
-  //   return this.certService.certificateAdd(action.certificate).then(value => {
-  //     ctx.setState({
-  //       ...state,
-  //       certificate: [...state.certificate, action.certificate]
-  //     });
-  //   });
-  // }
   @Action(CertificateReadAll)
   certificateReadAll(ctx: StateContext<CertificateStateModel>, action: CertificateReadAll) {
     const state = ctx.getState();
@@ -147,18 +131,4 @@ export class CertificateState {
     ctx.dispatch(new Navigate(['cert']));
   }
 
-  // @Action(LoadPage)
-  // loadPage(ctx: StateContext<CertificateStateModel>) {
-  //   return this.certService.loadItems();
-  // }
-  //
-  // @Action(NextPage)
-  // nextPage(ctx: StateContext<CertificateStateModel>) {
-  //   return this.certService.nextPage();
-  // }
-  //
-  // @Action(PreviousPage)
-  // previousPage(ctx: StateContext<CertificateStateModel>) {
-  //   return this.certService.prevPage();
-  // }
 }

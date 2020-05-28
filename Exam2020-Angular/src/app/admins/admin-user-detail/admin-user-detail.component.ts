@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 import {AuthUser} from '../../auth/shared/authUser';
 import {FormBuilder} from '@angular/forms';
 import {GetUser} from '../../users/shared/user.actions';
-import {DeleteUser, GetImage, LoginEmail, LogOut, UpdateUser} from '../../auth/shared/auth.action';
+import {UpdateUser} from '../../auth/shared/auth.action';
 import {AdminState} from '../shared/admin.state';
 import {CertificateReadAll, SetSelectedCertificate} from '../../certificates/shared/certificate.action';
 import {Certificate} from '../../certificates/shared/certificate';
@@ -19,10 +19,8 @@ export class AdminUserDetailComponent implements OnInit {
 
   @Select(AdminState.selectedUser)
   selectedUser$: Observable<AuthUser>;
-  payload: AuthUser;
   userSub: AuthUser;
   image: File;
-  userSettings;
   userForm;
   certificates: Certificate[];
   @Select(CertificateState.certificates)
@@ -68,18 +66,11 @@ export class AdminUserDetailComponent implements OnInit {
       mUId: this.userSub.mUId,
       mUserName: data.username,
       mPhone: data.phone.toString(),
-    }
+    };
     if (this.image == null) {
       bar.mImageUrl = this.userSub.mImageUrl;
     }
 
-    //this.payload.mPhone = data.phone;
-    //this.payload.mEmail = data.email;
-    //this.payload.mUserName = data.username;
-    //this.payload.mName = data.name;
-    //this.payload.mUId = this.userSub.mUId;
-    //this.editUserData(this.payload);
-    console.log('payload', bar);
     this.editUserData(bar);
 
   }
@@ -92,17 +83,8 @@ export class AdminUserDetailComponent implements OnInit {
     }
   }
 
-  login() {
-    console.warn('login');
-    this.store.dispatch(new LoginEmail('a@hotmail.com', '12345678'));
-  }
-
   imageFileSet(event) {
     this.image = event.target.files[0];
-  }
-
-  getProfilePic(uid: string) {
-    this.store.dispatch(new GetImage(uid));
   }
 
   goToCertificateDetails(certificate: Certificate) {

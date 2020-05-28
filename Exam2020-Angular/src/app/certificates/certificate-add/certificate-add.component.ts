@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {Certificate} from '../shared/certificate';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 import {Select, Store} from '@ngxs/store';
 import {CertificateAdd} from '../shared/certificate.action';
 import {AuthState} from '../../auth/shared/auth.state';
 import {Observable} from 'rxjs';
 import {AuthUser} from '../../auth/shared/authUser';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material';
+import {MAT_DATE_LOCALE} from '@angular/material';
 
 
 
@@ -20,7 +20,6 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material'
   ],
 })
 export class CertificateAddComponent implements OnInit {
-private certificate: Certificate;
 image;
   @Select(AuthState.loggedInUser)
   loggedInUser$: Observable<AuthUser>;
@@ -42,17 +41,14 @@ image;
 
   addCertificate() {
     const mName = this.certificateForm.get('mName').value;
-    console.log(this.certificateForm.get('mExpirationDate').value.toLocaleString());
     const mExpirationDate = this.certificateForm.get('mExpirationDate').value.toLocaleString().split(', ')[0].split('.').join('/');
     const mPhoto = this.certificateForm.get('mPhoto').value;
     const certificate: Certificate = {mName, mExpirationDate, mPhoto};
-    console.log(certificate);
     certificate.mUserUid = this.userSub.mUId;
     this.store.dispatch(new CertificateAdd (certificate, this.image, this.userSub.mUId));
   }
 
   setImage(event) {
     this.image = event.target.files[0];
-    console.log(this.image);
   }
 }

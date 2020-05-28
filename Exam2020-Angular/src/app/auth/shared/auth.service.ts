@@ -5,7 +5,7 @@ import {Router} from '@angular/router';
 import {User} from 'firebase/app';
 import {from, Observable} from 'rxjs';
 import {AuthUser} from './authUser';
-import {first, map, tap} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {UserService} from '../../users/shared/user.service';
 
 @Injectable({
@@ -37,20 +37,9 @@ export class AuthService {
 
   getUser(uid: string): Observable<AuthUser> {
     return this.userService.getUser(uid);
-    // return undefined;
   }
   firebaseUserToAuthUser(user: User): AuthUser {
     if (user) {
-      // return this.getUser(user.uid).pipe(
-      //   first(),
-      //   map(value => {
-      //     return {
-      //       mUId: value.mUId,
-      //       mUserName: value.mUserName,
-      //       mEmail: value.mEmail
-      //     }
-      //   })
-      // );
       return {
         mUId: user.uid,
         mUserName: user.displayName,
@@ -60,7 +49,6 @@ export class AuthService {
   }
   deleteUser() {
     this.afAuth.auth.currentUser.delete().then(r => {
-      console.log('Delete succesfull', r);
     });
   }
 

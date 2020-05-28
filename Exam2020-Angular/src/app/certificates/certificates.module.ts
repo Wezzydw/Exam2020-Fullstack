@@ -16,7 +16,6 @@ import {
 } from '@angular/material';
 import {ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {DeleteDialogComponent} from '../shared/delete-dialog/delete-dialog.component';
 
 
 

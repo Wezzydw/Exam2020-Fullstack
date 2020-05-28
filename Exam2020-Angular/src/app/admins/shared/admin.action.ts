@@ -5,3 +5,4 @@ export class SetSelectedUser {
 
   constructor(public user: AuthUser) {}
 }
+

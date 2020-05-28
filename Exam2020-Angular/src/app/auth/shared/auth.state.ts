@@ -66,12 +66,8 @@ export class AuthState {
   @Action(UpdateUser)
   async update(ctx: StateContext<AuthStateModel>, {payload, image}: UpdateUser) {
     if (image != null) {
-      console.log('ImagenotNull');
       await this.userService.uploadImage(image, payload.mUId).then( a => {
-        console.log('waiting', a);
-        console.log('before getimage');
         return this.userService.getImage(payload.mUId).then(result => {
-          console.log('before ctx')
           payload.mImageUrl = result;
           this.userService.updateUser(payload);
         });
@@ -83,11 +79,7 @@ export class AuthState {
 
     } else {
       this.userService.updateUser(payload);
-      const user = AuthState.loggedInUser(ctx.getState());
-      console.log('before getimage');
-
       return this.userService.getImage(payload.mUId).then(result => {
-        console.log('before ctx')
         payload.mImageUrl = result;
         ctx.setState({
           ...ctx.getState(),
@@ -95,21 +87,7 @@ export class AuthState {
         });
       });
     }
-
-    //ctx.dispatch(new GetImage(payload.mUId));
   }
-  @Action(GetImage)
-  getImage({getState, setState}: StateContext<AuthStateModel>, {uid}: GetUser) {
-
-    const state = getState();
-    // return this.userService.getImage(uid).pipe(tap( result => {
-    //   setState({
-    //     ...state,
-    //     role: result
-    //   });
-    // }));
-  }
-
   @Action(LogOut)
   logOut(ctx: StateContext<AuthStateModel>) {
     const state = ctx.getState();

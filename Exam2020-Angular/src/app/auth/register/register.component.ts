@@ -3,7 +3,6 @@ import {Component, OnInit} from '@angular/core';
 import {AuthUser} from '../shared/authUser';
 import {Store} from '@ngxs/store';
 import {RegisterUser} from '../shared/auth.action';
-import {User} from 'firebase';
 import {MatDialog} from '@angular/material/dialog';
 import {PopuppasswordComponent} from '../../shared/popuppassword/popuppassword.component';
 
@@ -14,7 +13,6 @@ import {PopuppasswordComponent} from '../../shared/popuppassword/popuppassword.c
 })
 export class RegisterComponent implements OnInit {
   user: AuthUser;
-  fireUser: User;
   dialogOpen: boolean;
 
 

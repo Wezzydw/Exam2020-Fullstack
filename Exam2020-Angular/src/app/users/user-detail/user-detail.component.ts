@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder} from '@angular/forms';
-import {Userstats} from '../shared/userstats';
 import {Select, Store} from '@ngxs/store';
 import {GetUser, } from '../shared/user.actions';
-import {UserState} from '../shared/user.state';
 import {Observable} from 'rxjs';
-import {DeleteUser, GetImage, LoginEmail, LogOut, UpdateUser} from '../../auth/shared/auth.action';
+import {GetImage, LoginEmail, UpdateUser} from '../../auth/shared/auth.action';
 import {AuthUser} from '../../auth/shared/authUser';
 import {AuthState} from '../../auth/shared/auth.state';
 import {MatDialog} from '@angular/material';
@@ -20,10 +18,8 @@ export class UserDetailComponent implements OnInit {
 
   @Select(AuthState.loggedInUser)
   loggedInUser$: Observable<AuthUser>;
-  payload: AuthUser;
   userSub: AuthUser;
   image: File;
-  userSettings;
   userForm;
   constructor(private formBuilder: FormBuilder, private store: Store, private dialogRef: MatDialog) {this.userForm = this.formBuilder.group({
     name: '',
@@ -61,42 +57,23 @@ export class UserDetailComponent implements OnInit {
         mUId: this.userSub.mUId,
         mUserName: data.username,
         mPhone: data.phone.toString(),
-      }
+      };
     if (this.image == null) {
         bar.mImageUrl = this.userSub.mImageUrl;
     }
 
-      //this.payload.mPhone = data.phone;
-      //this.payload.mEmail = data.email;
-      //this.payload.mUserName = data.username;
-      //this.payload.mName = data.name;
-      //this.payload.mUId = this.userSub.mUId;
-      //this.editUserData(this.payload);
-      console.log('payload', bar);
     this.editUserData(bar);
 
   }
 
   editUserData(payload: AuthUser) {
-    if (this.store.dispatch(new UpdateUser(payload, this.image))) {
-      console.log('Succes saving changes');
-    } else {
-      console.log('saving not successfullyyyllllulyy');
-    }
-  }
-
-  login() {
-    console.warn('login');
-    this.store.dispatch(new LoginEmail('a@hotmail.com', '12345678'));
+    this.store.dispatch(new UpdateUser(payload, this.image));
   }
 
   imageFileSet(event) {
     this.image = event.target.files[0];
   }
 
-  getProfilePic(uid: string) {
-    this.store.dispatch(new GetImage(uid));
-  }
   deleteUser() {
     this.dialogRef.open(DeleteUserDialogComponent);
   }

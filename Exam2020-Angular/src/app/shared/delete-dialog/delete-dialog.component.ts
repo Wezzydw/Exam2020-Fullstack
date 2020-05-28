@@ -5,7 +5,6 @@ import {CertificateState} from '../../certificates/shared/certificate.state';
 import {Observable} from 'rxjs';
 import {Certificate} from '../../certificates/shared/certificate';
 import {CertificateDelete} from '../../certificates/shared/certificate.action';
-import {Navigate} from '@ngxs/router-plugin';
 
 @Component({
   selector: 'app-delete-dialog',

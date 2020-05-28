@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
 import {CertificateState} from '../shared/certificate.state';
 import {Certificate} from '../shared/certificate';
 import {FormControl, FormGroup} from '@angular/forms';
-import {CertificateDelete, UpdateCertificate} from '../shared/certificate.action';
+import {UpdateCertificate} from '../shared/certificate.action';
 import {MAT_DATE_LOCALE, MatDialog} from '@angular/material';
 import {DeleteDialogComponent} from '../../shared/delete-dialog/delete-dialog.component';
 
@@ -52,7 +52,6 @@ SelectedCertificate$: Observable<Certificate>;
   }
   setImage(event) {
     this.image = event.target.files[0];
-    console.log(this.image);
   }
 
 
